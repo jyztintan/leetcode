@@ -1,7 +1,7 @@
 def trap(height) -> int:
     l, max_left = 0, height[0]
     r = len(height) - 1
-    max_right =  height[r]
+    max_right = height[r]
     total = 0
     while l < r:
         if max_left < max_right:
