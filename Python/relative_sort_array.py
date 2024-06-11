@@ -1,5 +1,5 @@
 '''
-This solution uses a hash map for counting and sorting
+This solution uses counting sort since it was specified that 0 <= arr1[i] <= 1000
 
 Time Complexity: O(n + m + k), where k = 1000 in this case
 1. Loop through elements of arr1 - O(n)
