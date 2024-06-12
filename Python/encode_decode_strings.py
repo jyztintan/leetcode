@@ -17,5 +17,5 @@ class Solution:
             index = pos + num + 1
         return ans
 
-s = Solution()
-print(s.decode("3#hat4#thor"))
+# s = Solution()
+# print(s.decode("3#hat4#thor"))

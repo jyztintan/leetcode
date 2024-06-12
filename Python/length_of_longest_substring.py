@@ -11,11 +11,11 @@ def length_of_longest_substring(s):
         res = max(res, len(chars))
     return res
 
-s = "abcabcbb"
-print(length_of_longest_substring(s))
-s = "bbbbb"
-print(length_of_longest_substring(s))
-s = "pwwkew"
-print(length_of_longest_substring(s))
-s = "abcabcbb"
-print(length_of_longest_substring(s))
+# s = "abcabcbb"
+# print(length_of_longest_substring(s))
+# s = "bbbbb"
+# print(length_of_longest_substring(s))
+# s = "pwwkew"
+# print(length_of_longest_substring(s))
+# s = "abcabcbb"
+# print(length_of_longest_substring(s))

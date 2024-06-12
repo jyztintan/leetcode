@@ -21,6 +21,6 @@ class Solution(object):
                 right -= 1
         return ans
 
-height = [1,8,6,2,5,4,8,3,7]
-height = [1,2,1]
-print(maxArea(height))
+# height = [1,8,6,2,5,4,8,3,7]
+# height = [1,2,1]
+# print(maxArea(height))

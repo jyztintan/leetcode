@@ -23,6 +23,6 @@ class Solution(object):
         return ans
 
 # Testing
-sol = Solution()
-nums = [4,5,0,-2,-3,1]
-print(sol.subarraysDivByK(nums, 5))
+# sol = Solution()
+# nums = [4,5,0,-2,-3,1]
+# print(sol.subarraysDivByK(nums, 5))

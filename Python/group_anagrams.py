@@ -8,5 +8,5 @@ def groupAnagrams(strs):
     return d.values()
     
 
-strs = ["eat","tea","tan","ate","nat","bat"]
-print(groupAnagrams(strs))
+# strs = ["eat","tea","tan","ate","nat","bat"]
+# print(groupAnagrams(strs))

@@ -7,6 +7,6 @@ class Solution(object):
             d[target - nums[i]] = i
 
 
-nums = [3,2,4]
-target = 6
-print(twoSum(nums, target))
+# nums = [3,2,4]
+# target = 6
+# print(twoSum(nums, target))

@@ -23,6 +23,6 @@ class Solution(object):
                 end -= 1
         return True
         
-s1 = "A man, a plan, a canal: Panama"
-sol = Solution()
-print(sol.isPalindrome(s1))
+# s1 = "A man, a plan, a canal: Panama"
+# sol = Solution()
+# print(sol.isPalindrome(s1))

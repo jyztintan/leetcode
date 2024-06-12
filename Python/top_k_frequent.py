@@ -17,7 +17,6 @@ class Solution(object):
             if len(ans) >= k:
                 return ans
 
-sol = Solution()
-nums = [1,1,1,2,2,3]
-print(sol.topKFrequent(nums, 2))
-
+# sol = Solution()
+# nums = [1,1,1,2,2,3]
+# print(sol.topKFrequent(nums, 2))

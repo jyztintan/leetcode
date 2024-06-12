@@ -1,7 +1,7 @@
 # Kadane's Algorithm -> O(n) time
 
 class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
+    def maxSubArray(self, nums) -> int:
         if len(nums) == 1:
             return nums[0]
         mid = len(nums)//2

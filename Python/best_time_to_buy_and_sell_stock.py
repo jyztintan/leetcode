@@ -9,6 +9,6 @@ class Solution:
                 profit = price - buy
         return profit
 
-test = Solution()
-print(test.maxProfit([7,1,5,3,6,4]))
-print(test.maxProfit([7,6,4,3,1]))
+# test = Solution()
+# print(test.maxProfit([7,1,5,3,6,4]))
+# print(test.maxProfit([7,6,4,3,1]))

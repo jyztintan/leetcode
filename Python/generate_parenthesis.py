@@ -21,11 +21,7 @@ def generate_parenthesis(n):
     generate_answer(0,0)
     return res
 
-
-        
-
-
-print(generate_parenthesis(1))
-print(generate_parenthesis(2))
-print(generate_parenthesis(3))
-print(generate_parenthesis(4))
+# print(generate_parenthesis(1))
+# print(generate_parenthesis(2))
+# print(generate_parenthesis(3))
+# print(generate_parenthesis(4))

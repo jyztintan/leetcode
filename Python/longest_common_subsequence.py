@@ -15,5 +15,5 @@ class Solution:
         other_possible = self.memoize[(text1, text2[:-1])]
         return possible if possible > other_possible else other_possible
 
-test = Solution()
-print(test.longestCommonSubsequence("abcde", "ace"))
+# test = Solution()
+# print(test.longestCommonSubsequence("abcde", "ace"))

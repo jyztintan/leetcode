@@ -9,10 +9,7 @@ def productExceptSelf(nums):
     total = reduce(lambda x,y:x*y, nums, 1)
     return list(map(lambda x:total/x, nums))
 
-
-
-
-nums1 = [1,2,3,4]
-nums2 = [-1,1,0,-3,3]
-print(productExceptSelf(nums1))
-print(productExceptSelf(nums2))
+# nums1 = [1,2,3,4]
+# nums2 = [-1,1,0,-3,3]
+# print(productExceptSelf(nums1))
+# print(productExceptSelf(nums2))
