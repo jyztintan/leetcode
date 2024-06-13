@@ -9,7 +9,6 @@ Time Complexity: O(n)
 Space Complexity: O(n)
 Output array requires a size of n - O(n)
 """
-
 class Solution(object):
     def productExceptSelf(self, nums):
         """
