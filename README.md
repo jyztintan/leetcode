@@ -1,6 +1,6 @@
 # Leetcode
 
-[![jyztintan's LeetCode stats](https://leetcode-stats-six.vercel.app/?username=jyztintan&theme=dark)](https://github.com/jyztintan/leetcode-stats)
+[![jyztintan's LeetCode stats](![Leetcode Stats](https://https://https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap))
 
 | ID   | Problem Name                                   | Solution                                                                                                                                                                                                                                                                                                                              |
 |------|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
