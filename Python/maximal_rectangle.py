@@ -1,13 +1,20 @@
 class Solution:
     def maximalRectangle(self, matrix) -> int:
+        # Keep track of each column value, represented in a histogram format ish
         processed = [0] * len(matrix[0])
         ans = 0
         for row in matrix:
             for i in range(len(row)):
+
+                # Increment the column value by 1 if there is a value
                 if row[i] == "1":
                     processed[i] += 1
+
+                # Otherwise the value needs to be reset to 0 as it is not contiguous
                 else:
                     processed[i] = 0
+
+            # After every round of processing, check for the greatest area in the new histogram
             ans = max(ans, self.largestRectangleArea(processed))
         return ans
 
