@@ -19,6 +19,7 @@ class Solution:
 
         # The maximum min force between balls would when m = 2 and the balls are placed in the first and last bins
         high = max(position) - min(position)
+        best = -1
 
         while low <= high:
             mid = (low + high) // 2
@@ -30,11 +31,12 @@ class Solution:
 
             # If the number of balls we can put is greater than or equals to m, we can try to increase the force
             if num_balls >= m:
+                best = mid
                 low = mid + 1
 
-        return high
+        return best
 
-# position = [1,2,3,4,5,6,7,8,9,10]
-# print(Solution().maxDistance(position, 4))
-# position = [5,4,3,2,1,1000000000]
-# print(Solution().maxDistance(position, 2))
+position = [1,2,3,4,5,6,7,8,9,10]
+print(Solution().maxDistance(position, 4))
+position = [5,4,3,2,1,1000000000]
+print(Solution().maxDistance(position, 2))
