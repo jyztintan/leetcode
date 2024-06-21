@@ -3,10 +3,8 @@ class Solution:
         buy = float('inf')
         profit = 0
         for price in prices:
-            if price < buy:
-                buy = price
-            elif price - buy > profit:
-                profit = price - buy
+            best = max(best, price - low)
+            low = min(low, price)
         return profit
 
 # test = Solution()
