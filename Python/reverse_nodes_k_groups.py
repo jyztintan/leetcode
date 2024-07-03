@@ -33,13 +33,13 @@ class Solution:
 
         return head
 
-lst1 = ListNode(1, ListNode(4, ListNode(7, ListNode(9))))
-lst2 = ListNode(2, ListNode(4, ListNode(5, ListNode(6))))
-def printList(node):
-    while node:
-        print(node.val, end=" -> ")
-        node = node.next
-    print("None")
-
-printList(Solution().reverseKGroup(lst1, 2))
-printList(Solution().reverseKGroup(lst2, 4))
+# lst1 = ListNode(1, ListNode(4, ListNode(7, ListNode(9))))
+# lst2 = ListNode(2, ListNode(4, ListNode(5, ListNode(6))))
+# def printList(node):
+#     while node:
+#         print(node.val, end=" -> ")
+#         node = node.next
+#     print("None")
+#
+# printList(Solution().reverseKGroup(lst1, 2))
+# printList(Solution().reverseKGroup(lst2, 4))
