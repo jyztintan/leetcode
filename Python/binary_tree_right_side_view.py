@@ -8,6 +8,8 @@ class TreeNode(object):
 
 class Solution(object):
     def rightSideView(self, root):
+
+        res = []
         def check_by_height(root, height):
             if not root:
                 return
@@ -17,7 +19,6 @@ class Solution(object):
             check_by_height(root.left, height + 1)
             return
 
-        res = []
         check_by_height(root, 0)
         return res
 
