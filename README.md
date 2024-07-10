@@ -1,4 +1,4 @@
-`# Leetcode
+# Leetcode
 
 [![jyztintan's LeetCode stats](https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap)](https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap)
 
