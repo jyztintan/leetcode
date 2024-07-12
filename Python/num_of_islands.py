@@ -65,15 +65,11 @@ class Solution:
                     # Take note of number of rivers
                     count += 1
 
-        # We relax all the points so that all connected points (ie islands) will have the same parent
-        for i in range(m * n):
-            ufds.find(i)
-
         # Count the total number of unique parents which will represent 'islands'
         unique = set()
-        for parent in ufds.parents:
-            if parent not in unique:
-                unique.add(parent)
+        for i in range(m * n):
+            # We relax all the points so that all connected points (ie islands) will have the same parent
+            unique.add(ufds.find(i))
 
         # Subtract the number of water points in our UFDS
         return len(unique) - count
