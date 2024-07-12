@@ -53,3 +53,5 @@ class Solution:
             # However, if the 2 vertices are already connected then the union is "redundant"
             if ufds.union(u - 1, v - 1):
                 return [u, v]
+
+# print(Solution().findRedundantConnection([(1,2),(2,1),(2,3),(3,1)]))

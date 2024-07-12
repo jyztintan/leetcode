@@ -46,7 +46,7 @@ class Solution:
                 # Add the ancestors of our parent
                 ancestors[child].update(ancestors[node])
 
-        # Leetcode wants the ancestor list to be sorted
+        # The final ancestor list has to be sorted
         ans = [sorted(list(lst)) for lst in ancestors]
         return ans
 
