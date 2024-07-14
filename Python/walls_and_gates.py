@@ -23,7 +23,7 @@ class Solution:
                 if 0 <= col - 1 and dist + 1 < grid[row][col - 1]:
                     q.put((dist + 1, row, col - 1))
 
-                # BFS Left
+                # BFS Right
                 if col + 1 < len(grid[0]) and dist + 1 < grid[row][col + 1]:
                     q.put((dist + 1, row, col + 1))
 

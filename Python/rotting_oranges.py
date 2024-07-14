@@ -48,5 +48,5 @@ class Solution:
 
         return ans if not fresh else -1
 
-grid = [[2,1,1],[1,1,0],[0,1,1]]
-print(Solution().orangesRotting(grid))
+# grid = [[2,1,1],[1,1,0],[0,1,1]]
+# print(Solution().orangesRotting(grid))
