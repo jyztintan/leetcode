@@ -1,10 +1,12 @@
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites) -> bool:
+    def findOrder(self, numCourses: int, prerequisites):
         d = {i:set() for i in range(numCourses)}
         for course, prereq in prerequisites:
             d[prereq].add(course)
 
         visited = [0] * numCourses
+
+        order = []
         def dfs(course):
 
             # If it is still pending, then this is an invalid course mapping
@@ -21,13 +23,14 @@ class Solution:
                     return False
 
             visited[course] = 2
+            order.append(course)
             return True
 
         for course in range(numCourses):
             if not dfs(course):
-                return False
+                return []
 
-        return True
+        return order
 
-# prerequisites = [[1,0],[0,2],[2,1]]
-# print(Solution().canFinish(3, prerequisites))
+# prerequisites = [[1,0],[0,2],[2,3]]
+# print(Solution().findOrder(4, prerequisites))
