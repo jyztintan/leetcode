@@ -1,4 +1,4 @@
-# Solution 1: Using Greedy array modification?
+# Solution 1: Using Greedy solution
 class Solution:
 
     def canJump(self, nums) -> bool:
