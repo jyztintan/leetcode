@@ -1,5 +1,6 @@
 from typing import List
 
+
 class Solution:
     def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
         subarray_sums = []
@@ -12,6 +13,6 @@ class Solution:
             prev = to_add
 
         subarray_sums.sort()
-        return sum(subarray_sums[left - 1:right]) % (10**9 + 7)
+        return sum(subarray_sums[left - 1:right]) % (10 ** 9 + 7)
 
 # print(Solution().rangeSum([1,2,3,4], 4, 1, 5))
