@@ -19,10 +19,10 @@ class KthLargest:
             heapq.heapreplace(self.nums, val)
         return self.nums[0]
 
-test = KthLargest(1, [])
-print(test.add(-3))
-print(test.add(-2))
-print(test.add(-4))
-print(test.add(9))
+# test = KthLargest(1, [])
+# print(test.add(-3))
+# print(test.add(-2))
+# print(test.add(-4))
+# print(test.add(9))
 # print(test.add(4))
 
