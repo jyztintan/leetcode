@@ -4,19 +4,22 @@ class Solution:
         ans = []
 
         def dfs(pointer, combi, total):
+            if total > target:
+                return
             if total == target:
                 ans.append(combi[:])
                 return
-            if pointer >= len(candidates) or total > target:
-                return
 
-            combi.append(candidates[pointer])
-            dfs(pointer + 1, combi, total + candidates[pointer])
-            combi.pop()
-
-            while pointer < len(candidates) and candidates[pointer - 1] == candidates[pointer]:
-                pointer += 1
-            dfs(pointer + 1, combi, total)
+            prev = -1
+            for i in range(pointer, len(candidates)):
+                if candidates[i] == prev:
+                    continue
+                if total + candidates[i] > target:
+                    break
+                combi.append(candidates[i])
+                dfs(i + 1, combi, total + candidates[i])
+                combi.pop()
+                prev = candidates[i]
 
         dfs(0, [], 0)
         return ans
