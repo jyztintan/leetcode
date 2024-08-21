@@ -17,4 +17,4 @@ class Solution:
 
         return self.minSteps(highest_factor) + (n // highest_factor)
 
-print(Solution().minSteps(6))
+# print(Solution().minSteps(6))
