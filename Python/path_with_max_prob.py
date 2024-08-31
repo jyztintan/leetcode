@@ -2,7 +2,6 @@ import heapq
 from typing import List
 
 
-
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start_node: int,
                        end_node: int) -> float:
@@ -27,5 +26,6 @@ class Solution:
 
         return 0
 
-edges = [[0,1],[1,2],[0,2]]
-print(Solution().maxProbability(3, edges, [0.5,0.5,0.2], 0, 2))
+
+edges = [[0, 1], [1, 2], [0, 2]]
+print(Solution().maxProbability(3, edges, [0.5, 0.5, 0.2], 0, 2))
