@@ -1,7 +1,7 @@
 # Leetcode
 
 <p>
-  <img src="https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap" alt="LeetCode Stats" width="500" />
+  <img src="https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap" alt="LeetCode Stats" width="400" />
   <img src="assets/50day.png" alt="50 Day Challenge" width="200" height="320"/>
   <img src="assets/100day.png" alt="100 Day Challenge" width="200" height="320"/>
 </p>
