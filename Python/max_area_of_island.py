@@ -48,7 +48,6 @@ class Solution:
         ufds = UFDS(m*n)
 
         # Keep track of number of points that are water
-        count = 0
         for row in range(m):
             for col in range(n):
 
@@ -61,9 +60,7 @@ class Solution:
                     # We connect this land with the land directly to the right (if any)
                     if col + 1 < n and grid[row][col + 1] == 1:
                         ufds.union(row * n + col, row * n + col + 1)
-                else:
-                    # Take note of number of rivers
-                    count += 1
+
 
         # For each unique parents which will represent 'islands', we count its area
         areas = {}
@@ -81,7 +78,33 @@ class Solution:
             return ans
         return 0
 
+class Solution:
+    def maxAreaOfIsland(self, grid) -> int:
+        m, n = len(grid), len(grid[0])
+        biggest = 0
+        for row in range(m):
+            for col in range(n):
+                if grid[row][col] == 1:
+                    #Start dfs
+                    st = [(row, col)]
+                    visited = set()
+                    while st:
+                        x, y = st.pop()
+                        if (x, y) in visited:
+                            continue
+                        grid[x][y] = 0
+                        visited.add((x, y))
+                        if x - 1 >= 0 and grid[x - 1][y] == 1:
+                            st.append((x - 1, y))
+                        if y - 1 >= 0 and grid[x][y - 1] == 1:
+                            st.append((x, y - 1))
+                        if x + 1 < m and grid[x + 1][y] == 1:
+                            st.append((x + 1, y))
+                        if y + 1 < n and grid[x][y + 1] == 1:
+                            st.append((x, y + 1))
+                    biggest = max(biggest, len(visited))
+        return biggest
 
-grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]
-
-print(Solution().maxAreaOfIsland(grid))
+# grid = [[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]
+# grid = [[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]
+# print(Solution().maxAreaOfIsland(grid))
