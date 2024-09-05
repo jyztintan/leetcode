@@ -1,7 +1,8 @@
 # Leetcode
 
 [![jyztintan's LeetCode stats](https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap)](https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap)
-<img src="download.png" alt="LOL" width="200" height="320"/>
+<img src="assets/50day.png" alt="LOL" width="200" height="320"/>
+<img src="assets/100day.png" alt="LOL" width="200" height="320"/>
 
 | ID   | Problem Name                                                                | Solution                                                                                                                                                                                                                                                                                                                              |
 |------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
