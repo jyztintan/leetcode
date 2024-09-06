@@ -5,15 +5,15 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
-    def preorderTraversal(self, root):
+    def inorderTraversal(self, root):
         ans = []
         if not root:
             return ans
 
         def dfs(node):
-            ans.append(node.val)
             if node.left:
                 dfs(node.left)
+            ans.append(node.val)
             if node.right:
                 dfs(node.right)
 
