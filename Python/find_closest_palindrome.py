@@ -29,8 +29,8 @@ class Solution:
 
 
 
-print(Solution().nearestPalindromic("4"))
-print(Solution().nearestPalindromic("10"))
-print(Solution().nearestPalindromic("45654"))
+# print(Solution().nearestPalindromic("4"))
+# print(Solution().nearestPalindromic("10"))
+# print(Solution().nearestPalindromic("45654"))
 
 
