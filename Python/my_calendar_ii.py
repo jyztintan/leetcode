@@ -2,15 +2,13 @@ class MyCalendarTwo:
 
     def __init__(self):
         # Invariant: This should always be sorted
-        self.bookings = [[0, 0]]
+        self.bookings = []
         self.double = []
 
     def book(self, start: int, end: int) -> bool:
 
         def is_overlapping(start1, end1, start2, end2):
-            start =  max(start1, start2)
-            end = min(end1, end2)
-            return start < end
+            return max(start1, start2) < min(end1, end2)
 
         def get_overlap(start1, end1, start2, end2):
             return [max(start1, start2), min(end1, end2)]
