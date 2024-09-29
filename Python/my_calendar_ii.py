@@ -29,8 +29,8 @@ class MyCalendarTwo:
 
 
 # Your MyCalendar object will be instantiated and called as such:
-obj = MyCalendarTwo()
-print(obj.book(10, 20))
-print(obj.book(15, 20))
-print(obj.book(20, 30))
-print(obj.book(17, 30))
+# obj = MyCalendarTwo()
+# print(obj.book(10, 20))
+# print(obj.book(15, 20))
+# print(obj.book(20, 30))
+# print(obj.book(17, 30))
