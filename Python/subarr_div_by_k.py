@@ -1,26 +1,15 @@
 class Solution(object):
     def subarraysDivByK(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
-        ans = 0
-
-        # modulos
-        d = {}
-        current_mod = 0
+        seen = {}
+        cumulative = 0
+        total = 0
         for num in nums:
-            current_mod += num
-            current_mod = current_mod % k
-            if current_mod not in d:
-                if current_mod == 0:
-                    d[current_mod] = 1
-                else:
-                    d[current_mod] = 0
-            ans += d[current_mod]
-            d[current_mod] += 1
-        return ans
+            cumulative = (cumulative + num) % k
+            seen[cumulative] = seen.get(cumulative, 1 if cumulative == 0 else 0)
+            total += seen[cumulative]
+            seen[cumulative] += 1
+        return total
+
 
 # Testing
 # sol = Solution()
