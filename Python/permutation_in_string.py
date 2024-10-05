@@ -6,26 +6,30 @@ class Solution:
             return False
 
         # Keep track of letters we are accounting for
-        original = [0] * 26
+        target = [0] * 26
         window = [0] * 26
-        letter_order = ord('a')
 
         # Increment the relevant letter buckets of s1
         for c in s1:
-            original[ord(c) - letter_order] += 1
+            target[ord(c) - ord('a')] += 1
 
         # The first window is the first len(s1) letters in s2
-        for i in range(len(s1)):
-            window[ord(s2[i]) - letter_order] += 1
+        n = len(s1)
+        for i in range(n):
+            window[ord(s2[i]) - ord('a')] += 1
 
         # We incrementally slide the window while there is no matching list
-        for i in range(len(s1), len(s2)):
-            if window == original:
+        left = 0
+        for right in range(n, len(s2)):
+            if window == target:
                 return True
-            window[ord(s2[i - len(s1)]) - letter_order] -= 1
-            window[ord(s2[i]) - letter_order] += 1
+            window[ord(s2[left]) - ord('a')] -= 1
+            left += 1
+            window[ord(s2[right]) - ord('a')] += 1
 
-        return window == original
+        return window == target
+
+
 
 # print(Solution().checkInclusion("ab","eidbaooo"))
 # print(Solution().checkInclusion("ab","eidboaoo"))
