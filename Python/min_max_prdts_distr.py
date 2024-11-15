@@ -5,7 +5,6 @@ class Solution:
     def minimizedMaximum(self, n: int, quantities) -> int:
 
         # Number of product types
-        m = len(quantities)
         total = sum(quantities)
 
         # Try different allocations of stores

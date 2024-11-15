@@ -1,6 +1,5 @@
 class Solution:
     def minEnd(self, n: int, x: int) -> int:
-        curr = x
 
         i_x = 1
         i_n = 1
