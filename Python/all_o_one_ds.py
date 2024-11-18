@@ -112,7 +112,6 @@ class AllOne:
         prevNode.next = nextNode  # Link previous node to next node
         nextNode.prev = prevNode  # Link next node to previous node
 
-# fuck this useless ass fucking question
 class AllOne:
 
     def __init__(self):
