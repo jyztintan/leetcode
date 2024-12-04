@@ -9,7 +9,7 @@ class Solution(object):
         for num in nums:
             if num - 1 not in s:
                 count = 0
-                while num + count in s:
+                while num + 1 in s:
                     count += 1
                 ans = max(ans, count)
         return ans
