@@ -1,44 +1,28 @@
 class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        # Find pivot first
+        left, right = 1, n - 1
+        pivot = 0
+        while left <= right:
+            mid = (left + right) // 2
+            if mid > 0 and nums[mid] < nums[mid - 1]:
+                pivot = mid
+                break
+            elif nums[mid] > nums[0]:
+                left = mid + 1
+            else:
+                right = mid - 1
 
-    def search(self, nums, target: int) -> int:
-        def findMin(nums) -> int:
-            left, right = 0, len(nums) - 1
-            if len(nums) == 1:
-                return 0
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[mid] < nums[mid - 1]:
-                    return mid
-                elif nums[mid] < nums[right]:
-                    right = mid - 1
-                else:
-                    left = mid + 1
-            return right
+        shift = n - pivot
+        left, right = (pivot + shift) % n, (pivot - 1 + shift) % n
 
-        min_index = findMin(nums)
-
-        def search_inside(nums, target: int) -> int:
-            left, right = 0, len(nums) - 1
-            while left <= right:
-                mid = (left + right) // 2
-                if nums[mid] > target:
-                    right = mid - 1
-                elif nums[mid] < target:
-                    left = mid + 1
-                else:
-                    return mid
-            return -1
-
-        if target > nums[-1]:
-            return search_inside(nums[:min_index], target)
-        else:
-            ans = search_inside(nums[min_index:], target)
-            if ans != -1:
-                ans += min_index
-            return ans
-
-
-nums = [4,5,6,7,0,1,2]
-print(Solution().search(nums, 2))
-nums = [3, 1]
-print(Solution().search(nums, 0))
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[(mid - shift) % n] == target:
+                return (mid - shift) % n
+            elif nums[(mid - shift) % n] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return -1

@@ -1,48 +1,34 @@
+from collections import defaultdict
+
+
 class TimeMap:
 
     def __init__(self):
-        self.d = {}
+        self.d = defaultdict(list)
 
     def set(self, key: str, value: str, timestamp: int) -> None:
-        # We store the possible values, together with their timestamp in a list
-        # We can guarantee that the list is sorted because timestamp is strictly increasing
-        if key not in self.d:
-            self.d[key] = []
-
-        # Append the timestamp and value for easy binary searching later
-        self.d[key].append([timestamp, value])
+        self.d[key].append((timestamp, value))
 
     def get(self, key: str, timestamp: int) -> str:
-
-        # Default is empty string, even if there is no possible answer
-        ans = ""
-
-        # Get the possible values of the input key. If the key does not exist then return empty list
-        values = self.d.get(key, [])
-
-        # Perform binary search on the timestamps to find the most appropriate [timestamp, value] pair
-        low = 0
-        high = len(values) - 1
-        while low <= high:
-            mid = (low + high) // 2
-
-            # If mid timestamp is greater than timestamp then we have exceeded the limit so decrease range
-            if values[mid][0] > timestamp:
-                high = mid - 1
-
-            # If mid timestamp is less than timestamp then we try to get a pair with a higher timestamp
-            elif values[mid][0] < timestamp:
-
-                # Keep track of the best valid answer so far which is this value in the [timestamp, value] pair
-                ans = values[mid][1]
-                low = mid + 1
-
-            # If the mid pair has the exact timestamp, then we have found the perfect timestamp already
+        possible = self.d[key]
+        left, right = 0, len(possible) - 1
+        ans = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if possible[mid][0] > timestamp:
+                right = mid - 1
             else:
-                ans = values[mid][1]
-                break
+                ans = mid
+                left = mid + 1
+        if ans == -1:
+            return ""
+        return possible[ans][1]
 
-        return ans
+
+# Your TimeMap object will be instantiated and called as such:
+# obj = TimeMap()
+# obj.set(key,value,timestamp)
+# param_2 = obj.get(key,timestamp)
 
 
 # obj = TimeMap()
