@@ -35,6 +35,22 @@ class Solution(object):
                 max_right = max(max_right, height[r])
         return total
 
+# Brute force solution O(N^2) because we find the minimum of the left and right maximum pillars for each bar
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        collected = 0
+        n = len(height)
+        for mid in range(1, n - 1):
+            left_max = 0
+            for l in range(mid, -1, -1):
+                left_max = max(left_max, height[l])
+            right_max = 0
+            for r in range(mid, n):
+                right_max = max(right_max, height[r])
+            collected += min(left_max, right_max) - height[mid]
+        return collected
+
+
 
 # height = [0,1,0,2,1,0,1,3,2,1,2,1]
 # print(trap(height))
