@@ -1,3 +1,32 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+
+        rows = [[0] * 9 for _ in range(9)]
+        cols = [[0] * 9 for _ in range(9)]
+        boxes = [[0] * 9 for _ in range(9)]
+
+        for row in range(9):
+            for col in range(9):
+                value = board[row][col]
+
+                if value == ".":
+                    continue
+
+                value = int(value)
+                if rows[row][value - 1] == 1:
+                    return False
+                rows[row][value - 1] = 1
+
+                if cols[col][value - 1] == 1:
+                    return False
+                cols[col][value - 1] = 1
+
+                if boxes[row // 3 * 3 + col // 3][value - 1] == 1:
+                    return False
+                boxes[row // 3 * 3 + col // 3][value - 1] = 1
+
+        return True
+
 class Solution(object):
     def isValidSudoku(self, board):
         """
