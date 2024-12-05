@@ -2,19 +2,21 @@ class MinStack:
 
     def __init__(self):
         self.st = []
+        self.min_st = []
 
-    def push(self, val):
-        self.st.append([val, min(val, self.getMin())])
+    def push(self, val: int) -> None:
+        self.st.append(val)
+        if not self.min_st:
+            self.min_st.append(val)
+        else:
+            self.min_st.append(min(val, self.getMin()))
 
-    def pop(self):
+    def pop(self) -> None:
+        self.min_st.pop()
         self.st.pop()
 
-    def top(self) :
-        return self.st[-1][0]
+    def top(self) -> int:
+        return self.st[-1]
 
-    def getMin(self):
-
-        # We need this guard clause because when we push elements getMin() is also called
-        if self.st:
-            return self.st[-1][1]
-        return float("inf")
+    def getMin(self) -> int:
+        return self.min_st[-1]

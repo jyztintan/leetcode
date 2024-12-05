@@ -9,6 +9,32 @@ Time Complexity: O(n)
 Space Complexity: O(n)
 Output array requires a size of n - O(n)
 """
+
+
+class Solution:
+    def productExceptSelf(self, nums):
+        zeros = 0
+        total = 1
+        n = len(nums)
+        for num in nums:
+            if num == 0:
+                zeros += 1
+            else:
+                total *= num
+
+        ans = [0] * n
+        if zeros > 1:
+            return ans
+        elif zeros == 1:
+            ans[nums.index(0)] = total
+            return ans
+
+        ans = []
+        for num in nums:
+            ans.append(total // num)
+        return ans
+
+
 class Solution(object):
     def productExceptSelf(self, nums):
         """

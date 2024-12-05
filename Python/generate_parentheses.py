@@ -1,20 +1,23 @@
 class Solution:
-    def generateParenthesis(self, n):
-    
+    def generateParenthesis(self, n: int) -> List[str]:
         res = []
-        string = ""
+        brackets = []
 
-        def generate_answer(string, open, close):
-            if open == close == n:
-                res.append(string)
+        def dfs(open, close):
+            if len(brackets) == n * 2:
+                res.append("".join(brackets))
 
-            if open < n:
-                generate_answer(string + '(', open + 1, close)
+            if open > 0:
+                brackets.append("(")
+                dfs(open - 1, close)
+                brackets.pop()
 
-            if close < open:
-                generate_answer(string + ')', open, close + 1)
+            if close > open:
+                brackets.append(")")
+                dfs(open, close - 1)
+                brackets.pop()
 
-        generate_answer(string, 0,0)
+        dfs(n, n)
         return res
 
 # sol = Solution()

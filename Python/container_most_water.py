@@ -1,24 +1,17 @@
-class Solution(object):
-    def maxArea(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        left, right = 0, len(height) - 1
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
         ans = 0
+        l, r = 0, len(height) - 1
+        while l < r:
+            l_height, r_height = height[l], height[r]
+            ans = max(ans, (r - l) * min(l_height, r_height))
 
-        while left < right:
-            water = min(height[left], height[right]) * (right - left)
-            if water > ans:
-                ans = water
-
-            # Keep the better side, so if left lower, we move left hoping for a higher pole
-            if height[left] < height[right]:
-                left += 1
-
-            # If right lower, then we move the right side down hoping for a higher pole
+            # We keep the better side, so if left is lower, we shift left up, hoping for a higher pole
+            if l_height < r_height:
+                l += 1
             else:
-                right -= 1
+                r -= 1
+
         return ans
 
 # height = [1,8,6,2,5,4,8,3,7]

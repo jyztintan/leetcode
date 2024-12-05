@@ -1,37 +1,18 @@
 class Solution:
-    def largestRectangleArea(self, heights) -> int:
-        st = []
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        # Add initial dummy value for stack (this will never be popped)
+        stack = [[-1, 0]]
         max_area = 0
-
-        for i, height in enumerate(heights):
-
-            # If this is not a lower height, no issue
-            # If this is a lower height, then we need to move the "start" point to where we popped last
-            # This is to account for cases where there is a decrease and increase again
-            new_start = i
-
-            # If this height is lower than value(s) before
-            while st and height < st[-1][1]:
-
-                # Then we pop those as those values can no longer be "extended" to the right
-                idx, higher = st.pop()
-
-                # Calculate the max area those heights can reach (this point is the limit)
-                popped_area = (i - idx) * higher
-
-                # If the calculated is area is greater than max recorded area, replace it
-                max_area = max(max_area, popped_area)
-
-                # We need to move the new "start" point to where we popped the last height
-                new_start = idx
-            st.append((new_start, height))
-
-        # Account for those heights still in stack
-        for idx, higher in st:
-
-            # Check for max_areas
-            max_area = max(max_area, higher * (len(heights) - idx))
-
+        # Add dummy final height to resolve those still in stack
+        heights.append(0)
+        for idx, height in enumerate(heights):
+            # Whenever we encounter a descending height, we take all previous possible heights and generate
+            # a rectangle with longest possible width
+            while stack and stack[-1][0] >= height:
+                prev_height, prev_idx = stack.pop()
+                width = idx - stack[-1][1]
+                max_area = max(max_area, prev_height * width)
+            stack.append((height, idx + 1))
         return max_area
 
 # sol = Solution()
