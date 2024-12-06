@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
 
@@ -55,6 +58,63 @@ class Solution:
         l, r = ans
         return s[l:r+1]
 
-# s = "ADOBECODEBANC"
-# t = "ABC"
-# print(Solution().minWindow(s, t))
+
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        target_freq = defaultdict(int)
+        for c in t:
+            target_freq[c] += 1
+
+        n = len(s)
+        left = right = 0
+        curr_freq = defaultdict(int)
+
+        best = []
+        min_len = float('inf')
+
+        fulfilled = 0
+        while right < n:
+            char = s[right]
+            if char in target_freq:
+                curr_freq[char] += 1
+                if curr_freq[char] == target_freq[char]:
+                    fulfilled += 1
+
+            while fulfilled == len(target_freq):
+                if right - left + 1 < min_len:
+                    min_len = right - left + 1
+                    best = [left, right]
+
+                left_char = s[left]
+                if left_char in target_freq:
+                    curr_freq[left_char] -= 1
+                    if curr_freq[left_char] < target_freq[left_char]:
+                        fulfilled -= 1
+
+                left += 1
+
+            right += 1
+
+        if best:
+            return s[best[0]:best[1] + 1]
+        return ""
+
+# Check if it correctly returns when there is one possible permutations
+s = "ABCD"
+t = "ABC"
+assert Solution().minWindow(s, t) == "ABC"
+
+# Check if it correctly returns shortest if there are multiple possible permutations
+s = "ADOBECODEBANC"
+t = "ABC"
+assert Solution().minWindow(s, t) == "BANC"
+
+# # Empty String
+# s = "ABC"
+# t = ""
+# assert Solution().minWindow(s, t) == ""
+
+# No valid substring permutation
+s = "A"
+t = "ABCD"
+assert Solution().minWindow(s, t) == ""

@@ -5,6 +5,13 @@ class TreeNode:
         self.left = left
         self.right = right
 
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if p.val > root.val and q.val > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        if p.val < root.val and q.val < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        return root
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
@@ -28,25 +35,6 @@ class Solution:
             if ptr >= n or ptr >= m or path_p[ptr] != path_q[ptr]:
                 return path_p[ptr - 1]
             ptr += 1
-
-
-class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root:
-            return False
-
-        if root == p or root == q:
-            return root
-
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-
-        if left and right:
-            return root
-
-        if left:
-            return left
-        return right
 
 # root = TreeNode(3)
 # p = root.left = TreeNode(5)

@@ -7,25 +7,16 @@ class ListNode:
 
 class Solution:
     def mergeKLists(self, lists):
-        heap = []
+        min_heap = []
         for idx, head in enumerate(lists):
             if head:
-                heapq.heappush(heap, (head.val, idx, head))
+                heapq.heappush(min_heap, (head.val, idx, head))
 
         ans = current = ListNode(0)
-        while heap:
-            val, idx, node = heapq.heappop(heap)
+        while min_heap:
+            val, idx, node = heapq.heappop(min_heap)
             current.next = node
             current = current.next
             if node.next:
-                heapq.heappush(heap, (node.next.val, idx, node.next))
+                heapq.heappush(min_heap, (node.next.val, idx, node.next))
         return ans.next
-
-lst1 = ListNode(1, ListNode(4, ListNode(7, ListNode(9))))
-lst2 = ListNode(2, ListNode(4, ListNode(5, ListNode(6))))
-def printList(node):
-    while node:
-        print(node.val, end=" -> ")
-        node = node.next
-    print("None")
-printList(Solution().mergeKLists([lst1, lst2]))

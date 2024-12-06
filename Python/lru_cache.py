@@ -45,6 +45,7 @@ class LRUCache:
             least_recent = self.least_recent.next
             self.remove(least_recent)
             self.d.pop(least_recent.key)
+            
         new_node = Node(key, value)
         self.add(new_node)
         self.d[key] = new_node

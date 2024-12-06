@@ -13,6 +13,7 @@ class Solution:
             tail = head
             head = next
         return tail
+
     def reorderList(self, head) -> None:
         """
         Do not return anything, modify head in-place instead.
@@ -38,6 +39,38 @@ class Solution:
             first_half.next = second_half
             second_half.next = temp1
             first_half, second_half = temp1, temp2
+
+
+# This uses extra O(N) space since we have a list to store the nodes
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        order = [head]
+        tail = head
+        while tail.next:
+            tail = tail.next
+            order.append(tail)
+
+        left, right = 0, len(order) - 1
+        # Dummy head
+        new_head = curr = ListNode(0)
+        while left <= right:
+            if left == right:
+                curr.next = order[left]
+                curr = curr.next
+                break
+            curr.next = order[left]
+            curr = curr.next
+            left += 1
+            curr.next = order[right]
+            curr = curr.next
+            right -= 1
+
+        curr.next = None
+        return new_head
+
 
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4))))
 Solution().reorderList(head)

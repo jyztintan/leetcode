@@ -1,20 +1,19 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
+        n, m = len(s1), len(s2)
 
         # If there are more letters in s1 than s2, impossible for s2 to have a permutation substring s1
-        if len(s1) > len(s2):
+        if n > m:
             return False
 
-        # Keep track of letters we are accounting for
+        # Keep track of letter frequencies
         target = [0] * 26
         window = [0] * 26
 
-        # Increment the relevant letter buckets of s1
         for c in s1:
             target[ord(c) - ord('a')] += 1
 
-        # The first window is the first len(s1) letters in s2
-        n = len(s1)
+        # Initialise window for s2
         for i in range(n):
             window[ord(s2[i]) - ord('a')] += 1
 
@@ -29,8 +28,17 @@ class Solution:
 
         return window == target
 
+# Simple test case
+assert Solution().checkInclusion('abc', 'abcdef')
 
+# No permutation
+assert Solution().checkInclusion('abz', 'abcdef') == False
 
-# print(Solution().checkInclusion("ab","eidbaooo"))
-# print(Solution().checkInclusion("ab","eidboaoo"))
-# print(Solution().checkInclusion("mart","karma"))
+# Permutation in middle
+assert Solution().checkInclusion('edc', 'abcdef')
+
+# Empty string as s1
+assert Solution().checkInclusion('', 'abcdef')
+
+# s1 == s2
+assert Solution().checkInclusion('abc', 'abc')
