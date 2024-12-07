@@ -1,11 +1,13 @@
 # Definition for a binary tree node.
-class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
-import collections
+import queue
+
+
 class Codec:
 
     def serialize(self, root):
@@ -14,22 +16,21 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-
         if not root:
             return ""
-        q = collections.deque([root])
-        ans = []
+        levelorder = ""
+        q = [root]
         while q:
-            ele = q.popleft()
-            if not ele:
-                ans.append("null")
-                continue
-
-            ans.append(str(ele.val))
-            q.append(ele.left)
-            q.append(ele.right)
-
-        return ','.join(ans)
+            new_q = []
+            for node in q:
+                if not node:
+                    levelorder += 'None,'
+                    continue
+                levelorder += str(node.val) + ','
+                new_q.append(node.left)
+                new_q.append(node.right)
+            q = new_q
+        return levelorder
 
     def deserialize(self, data):
         """Decodes your encoded data to tree.
@@ -39,22 +40,26 @@ class Codec:
         """
         if not data:
             return None
-        data = data.split(',')
-        root = TreeNode(int(data[0]))
-        queue = collections.deque([root])
-        pointer = 1
-
-        while queue:
-            node = queue.popleft()
-
-            if pointer < len(data) and data[pointer] != 'null':
-                node.left = TreeNode(int(data[pointer]))
-                queue.append(node.left)
-            pointer += 1
-            if pointer < len(data) and data[pointer] != 'null':
-                node.right = TreeNode(int(data[pointer]))
-                queue.append(node.right)
-            pointer += 1
-
+        nodes = data.split(',')
+        root = TreeNode(int(nodes[0]))
+        q = queue.Queue()
+        q.put(root)
+        i = 1
+        while not q.empty() and i < len(nodes):
+            node = q.get()
+            if nodes[i] != 'None':
+                left = TreeNode(int(nodes[i]))
+                node.left = left
+                q.put(left)
+            i += 1
+            if nodes[i] != 'None':
+                right = TreeNode(int(nodes[i]))
+                node.right = right
+                q.put(right)
+            i += 1
         return root
 
+# Your Codec object will be instantiated and called as such:
+# ser = Codec()
+# deser = Codec()
+# ans = deser.deserialize(ser.serialize(root))

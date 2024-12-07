@@ -8,17 +8,18 @@ class TreeNode(object):
 
 class Solution(object):
     def rightSideView(self, root):
+        if not root:
+            return []
 
-        res = []
-        def check_by_height(root, height):
-            if not root:
-                return
-            if len(res) == height:
-                res.append(root.val)
-            check_by_height(root.right, height + 1)
-            check_by_height(root.left, height + 1)
-            return
-
-        check_by_height(root, 0)
-        return res
-
+        q = [root]
+        ans = []
+        while q:
+            ans.append(q[-1].val)
+            new_q = []
+            for node in q:
+                if node.left:
+                    new_q.append(node.left)
+                if node.right:
+                    new_q.append(node.right)
+            q = new_q
+        return ans
