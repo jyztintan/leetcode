@@ -78,6 +78,30 @@ class Solution:
             return ans
         return 0
 
+# Recursive
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        seen = set()
+
+        def explore_island(row, col):
+            if (row, col) in seen or row < 0 or row >= m or col < 0 or col >= n or grid[row][col] == 0:
+                return 0
+            seen.add((row, col))
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            count = 1
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                count += explore_island(new_row, new_col)
+            return count
+
+        best = 0
+        for row in range(m):
+            for col in range(n):
+                best = max(best, explore_island(row, col))
+        return best
+
+# Iterative
 class Solution:
     def maxAreaOfIsland(self, grid) -> int:
         m, n = len(grid), len(grid[0])
@@ -94,14 +118,11 @@ class Solution:
                             continue
                         grid[x][y] = 0
                         visited.add((x, y))
-                        if x - 1 >= 0 and grid[x - 1][y] == 1:
-                            st.append((x - 1, y))
-                        if y - 1 >= 0 and grid[x][y - 1] == 1:
-                            st.append((x, y - 1))
-                        if x + 1 < m and grid[x + 1][y] == 1:
-                            st.append((x + 1, y))
-                        if y + 1 < n and grid[x][y + 1] == 1:
-                            st.append((x, y + 1))
+                        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+                        for dx, dy in directions:
+                            new_row, new_col = dx + x, dy + y
+                            if 0 <= new_row < m and 0 <= new_col < n and grid[new_row][new_col] == 1:
+                                st.append((new_row, new_col))
                     biggest = max(biggest, len(visited))
         return biggest
 

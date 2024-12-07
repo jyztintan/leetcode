@@ -29,6 +29,7 @@ print(Solution().findKthLargest([3,2,1,5,6,4], 2))
 
 
 # Solution 2: Max Heap
+# Classic
 class Solution:
     def findKthLargest(self, nums, k: int) -> int:
         max_heap = []
@@ -41,3 +42,15 @@ class Solution:
             heapq.heappop(max_heap)
 
         return -heapq.heappop(max_heap)
+
+# Elegant one pass
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # We keep a min_heap with k elements so the kth largest will always be on the top of the heap
+        min_heap = []
+        for num in nums:
+            if len(min_heap) < k:
+                heappush(min_heap, num)
+            elif num > min_heap[0]:
+                heapreplace(min_heap, num)
+        return min_heap[0]

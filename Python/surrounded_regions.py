@@ -1,6 +1,39 @@
-# Thank you Prof Halim for teaching UFDS during my time in CS2040S AY23/24 Semester 1
-# Source: https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.py
-# Modified variable naming for code readability
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        # DFS 'escaped' regions from the border
+        # All other grids in the middle WILL become captured
+        m, n = len(board), len(board[0])
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+
+        def dfs(row, col):
+            if board[row][col] != "O":
+                return
+            board[row][col] = "E"
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                if 0 <= new_row < m and 0 <= new_col < n:
+                    dfs(new_row, new_col)
+
+        for col in range(n):
+            dfs(0, col)
+            dfs(m - 1, col)
+
+        for row in range(m):
+            dfs(row, 0)
+            dfs(row, n - 1)
+
+        for row in range(m):
+            for col in range(n):
+                if board[row][col] == 'E':
+                    board[row][col] = "O"
+                else:
+                    board[row][col] = "X"
+
+
+
 class UFDS:
     def __init__(self, n):
         self.parents = list(range(n))

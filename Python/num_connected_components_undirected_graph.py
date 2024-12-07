@@ -1,6 +1,27 @@
-# Thank you Prof Halim for teaching UFDS during my time in CS2040S AY23/24 Semester 1
-# Source: https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.py
-# Modified variable naming for code readability
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        adj_list = defaultdict(list)
+        for u, v in edges:
+            adj_list[u].append(v)
+            adj_list[v].append(u)
+
+        visited = set()
+
+        def dfs(node):
+            if node in visited:
+                return
+            visited.add(node)
+            for neighbour in adj_list[node]:
+                dfs(neighbour)
+
+        count = 0
+        for node in range(n):
+            if node not in visited:
+                count += 1
+                dfs(node)
+        return count
+
+
 class UFDS:
     def __init__(self, n):
         self.parents = list(range(n))

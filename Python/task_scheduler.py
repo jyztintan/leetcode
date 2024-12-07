@@ -1,42 +1,34 @@
 import heapq
-from collections import deque
+from collections import deque, defaultdict
+
 
 class Solution:
     def leastInterval(self, tasks, n: int) -> int:
 
         # Get frequency of each task
-        freq = {}
+        freq = defaultdict(int)
         for task in tasks:
-            freq[task] = freq.get(task, 0) + 1
+            freq[task] += 1
 
         # Push frequency of each task into a max heap, we dont care about the task name
-        heap = []
-        heapq.heapify(heap)
-        for task, num in freq.items():
-            heapq.heappush(heap, -num)
+        sorted_freq = [-count for count in freq.values()]
+        heapify(sorted_freq)
 
-        # Keeps track of time period passed
-        count = 0
-
-        # Keeps track of tasks that are on "time out" -> cannot be done as not long enough interval has passed
-        prev_tasks = deque()
+        time = 0
+        timeout = deque()
 
         # While there are still tasks to be done, either available now or on "time out"
-        while heap or prev_tasks:
-            count += 1
-
-            # Schedule to complete the next available task
-            if heap:
-                num = heapq.heappop(heap) + 1
-                # If this task needs to be done again, we take note of the interval
-                if num != 0:
-                    prev_tasks.append((num, count + n))
+        while sorted_freq or timeout:
 
             # Schedule back the repeated task
-            if prev_tasks and prev_tasks[0][1] == count:
-                heapq.heappush(heap, prev_tasks.popleft()[0])
+            if timeout and timeout[0][0] == time:
+                _, task_freq = timeout.popleft()
+                heappush(sorted_freq, task_freq)
+            time += 1
 
-        return count
-
-# tasks = ["A","A","A","B","B","B"]
-# print(Solution().leastInterval(tasks, 2))
+            if sorted_freq:
+                count = heappop(sorted_freq)
+                # If this task needs to be done again, we take note of the interval
+                if count + 1 < 0:
+                    timeout.append((time + n, count + 1))
+        return time

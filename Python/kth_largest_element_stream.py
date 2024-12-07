@@ -1,28 +1,28 @@
-import heapq
+from heapq import *
+
+
 class KthLargest:
 
-    def __init__(self, k: int, nums):
-        self.k = k
-        self.nums = []
+    def __init__(self, k: int, nums: List[int]):
+        self.capacity = k
+
+        # Only extract out the top k elements
         temp = []
-        heapq.heapify(temp)
-        heapq.heapify(self.nums)
         for num in nums:
-            heapq.heappush(temp, -num)
-        for i in range(min(k, len(nums))):
-            heapq.heappush(self.nums, - heapq.heappop(temp))
+            heappush(temp, - num)
+
+        # The kth element will be on the top of the min_heap
+        self.min_heap = []
+        for _ in range(min(k, len(nums))):
+            heappush(self.min_heap, - heappop(temp))
 
     def add(self, val: int) -> int:
-        if len(self.nums) < self.k:
-            heapq.heappush(self.nums, val)
-        elif val > self.nums[0]:
-            heapq.heapreplace(self.nums, val)
-        return self.nums[0]
+        if len(self.min_heap) < self.capacity:
+            heappush(self.min_heap, val)
+        elif val > self.min_heap[0]:
+            heapreplace(self.min_heap, val)
+        return self.min_heap[0]
 
-# test = KthLargest(1, [])
-# print(test.add(-3))
-# print(test.add(-2))
-# print(test.add(-4))
-# print(test.add(9))
-# print(test.add(4))
-
+# Your KthLargest object will be instantiated and called as such:
+# obj = KthLargest(k, nums)
+# param_1 = obj.add(val)

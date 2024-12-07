@@ -1,35 +1,29 @@
-import queue
-
 class Solution:
-    def islandsAndTreasure(self, grid) -> None:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        m, n = len(rooms), len(rooms[0])
 
-        def bfs(row, col):
+        # Stores row, col, steps to gate
+        dq = deque()
 
-            q = queue.Queue()
-            q.put((0, row, col))
-            while not q.empty():
-                dist, row, col = q.get()
-                grid[row][col] = dist
+        # Get all the gates
+        for row in range(m):
+            for col in range(n):
+                if rooms[row][col] == 0:
+                    dq.append((row, col, 0))
 
-                # BFS Upwards
-                if 0 <= row - 1 and dist + 1 < grid[row - 1][col]:
-                    q.put((dist + 1, row - 1, col))
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        while dq:
+            row, col, steps = dq.popleft()
 
-                # BFS Downwards
-                if row + 1 < len(grid) and dist + 1 < grid[row + 1][col]:
-                    q.put((dist + 1, row + 1, col))
+            if 0 < rooms[row][col] <= steps:
+                continue
 
-                # BFS Left
-                if 0 <= col - 1 and dist + 1 < grid[row][col - 1]:
-                    q.put((dist + 1, row, col - 1))
-
-                # BFS Right
-                if col + 1 < len(grid[0]) and dist + 1 < grid[row][col + 1]:
-                    q.put((dist + 1, row, col + 1))
-
-        for row in range(len(grid)):
-            for col in range(len(grid[0])):
-                if grid[row][col] == 0:
-                    bfs(row, col)
-
-        return grid
+            rooms[row][col] = steps
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                if new_row < 0 or new_row >= m or new_col < 0 or new_col >= n or rooms[new_row][new_col] <= steps + 1:
+                    continue
+                dq.append((new_row, new_col, steps + 1))

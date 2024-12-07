@@ -1,6 +1,26 @@
-# Thank you Prof Halim for teaching UFDS during my time in CS2040S AY23/24 Semester 1
-# Source: https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.py
-# Modified variable naming for code readability
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        count = 0
+
+        def explore_island(row, col):
+            if row < 0 or row >= m or col < 0 or col >= n or grid[row][col] == "0":
+                return
+
+            grid[row][col] = "0"
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                explore_island(new_row, new_col)
+
+        for row in range(m):
+            for col in range(n):
+                if grid[row][col] == "1":
+                    count += 1
+                    explore_island(row, col)
+        return count
+
+
 class UFDS:
     def __init__(self, n):
         self.parents = list(range(n))

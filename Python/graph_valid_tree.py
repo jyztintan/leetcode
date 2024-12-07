@@ -1,6 +1,27 @@
-# Thank you Prof Halim for teaching UFDS during my time in CS2040S AY23/24 Semester 1
-# Source: https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.py
-# Modified variable naming for code readability
+from collections import defaultdict
+
+
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        adj_list = defaultdict(list)
+        for u, v in edges:
+            adj_list[u].append(v)
+            adj_list[v].append(u)
+
+        visited = set()
+        st = [(0, -1)]
+        while st:
+            node, prev = st.pop()
+            visited.add(node)
+            for neighbour in adj_list[node]:
+                if neighbour == prev:
+                    continue
+                if neighbour in visited:
+                    return False
+                st.append([neighbour, node])
+
+        return len(visited) == n
+
 class UFDS:
     def __init__(self, n):
         self.parents = list(range(n))
