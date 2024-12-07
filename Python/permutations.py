@@ -1,24 +1,18 @@
 class Solution:
-    def permute(self, nums):
+    def permute(self, nums: List[int]) -> List[List[int]]:
 
-        ans = []
-
-        def backtrack(permutation, fixed: set):
-            if len(fixed) == len(nums):
-                ans.append(permutation[:])
+        def backtrack(curr, left):
+            if not left:
+                ans.append(curr.copy())
                 return
 
-            for i in range(len(nums)):
-                if i not in fixed:
-                    fixed.add(i)
-                    permutation.append(nums[i])
-                    backtrack(permutation, fixed)
-                    fixed.remove(i)
-                    permutation.pop()
+            for num in left.copy():
+                curr.append(num)
+                left.remove(num)
+                backtrack(curr, left)
+                curr.pop()
+                left.add(num)
 
-        backtrack([], set())
+        ans = []
+        backtrack([], set(nums))
         return ans
-
-
-nums = [1, 2, 3]
-print(Solution().permute(nums))

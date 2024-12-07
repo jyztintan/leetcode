@@ -1,36 +1,27 @@
 class Solution:
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        start = 0
-        end = len(s) - 1
-        while True:
-            if start >= end:
-                break
-            if s[start] != s[end]:
-                return False
-            else:
-                start += 1
-                end -= 1
-        return True
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
 
-    def partition(self, s: str):
+        def is_palindrome(s):
+            return s == s[::-1]
 
-        ans = []
+        valid_partitionings = []
 
-        def backtrack(idx, current_partition):
-            if idx == len(s):
-                ans.append(current_partition[:])
+        def backtrack(start, end, partition):
+            if end >= n:
                 return
+            curr = s[start:end + 1]
 
-            for end in range(idx + 1, len(s) + 1):
-                substring = s[idx:end]
-                if self.isPalindrome(substring):
-                    current_partition.append(substring)
-                    backtrack(end, current_partition)
-                    current_partition.pop()
+            if is_palindrome(curr):
+                partition_copy = partition.copy()
+                partition_copy.append(curr)
+                if end == n - 1:
+                    valid_partitionings.append(partition_copy)
+                    return
+                backtrack(end + 1, end + 1, partition_copy)
 
-        backtrack(0, [])
-        return ans
+            backtrack(start, end + 1, partition)
+
+        backtrack(0, 0, [])
+        return valid_partitionings
+

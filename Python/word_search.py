@@ -1,27 +1,31 @@
 class Solution:
-    def exist(self, board, word: str) -> bool:
-        if len(word) > len(board) * len(board[0]):
-            return False
-        rows = len(board)
-        cols = len(board[0])
-        visited = set()
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        m, n = len(board), len(board[0])
 
-        def dfs(row, col, idx):
-            if idx == len(word):
-                return True
-
-            if col < 0 or row < 0 or row >= rows or col >= cols or board[row][col] != word[idx] or (row, col) in visited :
+        def backtrack(row, col, ptr):
+            if row < 0 or row >= m or col < 0 or col >= n:
                 return False
 
-            visited.add((row, col))
-            if dfs(row - 1, col, idx + 1) or dfs(row + 1, col, idx + 1) or dfs(row, col - 1, idx + 1) or dfs(row, col + 1, idx + 1):
+            ori_char = board[row][col]
+            if ori_char != word[ptr]:
+                return False
+
+            if ptr + 1 == len(word):
                 return True
-            visited.remove((row, col))
+
+            board[row][col] = '#'
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                if backtrack(new_row, new_col, ptr + 1):
+                    return True
+            board[row][col] = ori_char
             return False
 
-        for row in range(rows):
-            for col in range(cols):
-                if dfs(row, col, 0):
+        for row in range(m):
+            for col in range(n):
+                if backtrack(row, col, 0):
                     return True
         return False
+
 

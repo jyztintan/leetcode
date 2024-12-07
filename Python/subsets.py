@@ -12,7 +12,6 @@ class Solution:
 
     def subsets(self, nums):
         ans = []
-
         subset = []
         def backtrack(idx):
             if idx >= len(nums):

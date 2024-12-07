@@ -1,24 +1,25 @@
 class Solution:
-    def letterCombinations(self, digits: str):
-        table = ["0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"]
-
-        ans = []
+    def letterCombinations(self, digits: str) -> List[str]:
         if not digits:
-            return ans
+            return []
 
-        def backtrack(pointer, substring):
-            if pointer == len(digits):
-                ans.append(substring)
+        mapping = {"2": "abc", "3": "def", "4": "ghi", "5": 'jkl', '6': "mno", '7': 'pqrs', '8': 'tuv', '9': "wxyz"}
+        combinations = []
+        curr = []
+
+        def backtrack(idx):
+            if idx == len(digits):
+                s = "".join(curr)
+                combinations.append(s)
                 return
-            for char in table[int(digits[pointer])]:
-                substring += char
-                backtrack(pointer + 1, substring)
-                substring = substring[:-1]
 
-        backtrack(0, "")
-        return ans
+            num = digits[idx]
+            for possible_char in mapping[num]:
+                curr.append(possible_char)
+                backtrack(idx + 1)
+                curr.pop()
 
-print(Solution().letterCombinations("23"))
-
+        backtrack(0)
+        return combinations
 
 

@@ -1,22 +1,20 @@
 class Solution:
-    def combinationSum(self, candidates, target: int):
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        combinations = []
+        n = len(candidates)
 
-        ans = []
-
-        def dfs(pointer, combi, total):
-            if total == target:
-                ans.append(combi[:])
+        def backtrack(curr, remainder, limit):
+            if remainder == 0:
+                combinations.append(curr.copy())
                 return
-            if pointer >= len(candidates) or total > target:
+            elif remainder < 0:
                 return
 
-            combi.append(candidates[pointer])
-            dfs(pointer, combi, total + candidates[pointer])
-            combi.pop()
-            dfs(pointer + 1, combi, total)
+            for idx in range(limit, n):
+                possible = candidates[idx]
+                curr.append(possible)
+                backtrack(curr, remainder - possible, idx)
+                curr.pop()
 
-        dfs(0, [], 0)
-        return ans
-
-# candidates = [2,3,6,7]
-# print(Solution().combinationSum(candidates, 7))
+        backtrack([], target, 0)
+        return combinations

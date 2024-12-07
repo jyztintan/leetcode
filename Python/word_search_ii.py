@@ -1,47 +1,47 @@
-class TrieNode(object):
+class TrieNode:
     def __init__(self):
         self.children = {}
-        self.end = False
+        self.word = None
 
-    def add_word(self, word):
-        curr = self
-        for c in word:
-            if c not in curr.children:
-                curr.children[c] = TrieNode()
-            curr = curr.children[c]
-        curr.end = True
 
 class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
 
-    def findWords(self, board, words):
-        root = TrieNode()
-        rows, cols = len(board), len(board[0])
-        ans, visited = set(), set()
-
+        # Create Trie and insert words inside
+        start = TrieNode()
         for word in words:
-            root.add_word(word)
+            curr = start
+            for char in word:
+                if char not in curr.children:
+                    curr.children[char] = TrieNode()
+                curr = curr.children[char]
+            curr.word = word
 
-        def dfs(row, col, node, word):
-            if col < 0 or row < 0 or row >= rows or col >= cols or board[row][col] not in node.children or (row, col) in visited :
+        m, n = len(board), len(board[0])
+        matched = []
+
+        # Perform backtracking to find reachable words
+        def backtrack(row, col, node):
+            if row < 0 or row >= m or col < 0 or col >= n:
                 return
 
-            visited.add((row, col))
-            node = node.children[board[row][col]]
-            word += board[row][col]
-            if node.end:
-                node.end = False
-                ans.add(word)
+            char = board[row][col]
+            if char not in node.children:
+                return
 
-            dfs(row - 1, col, node, word)
-            dfs(row + 1, col, node, word)
-            dfs(row, col - 1, node, word)
-            dfs(row, col + 1, node, word)
-            visited.remove((row, col))
+            next_node = node.children[char]
+            if next_node.word:
+                matched.append(next_node.word)
+                next_node.word = None
 
-        for row in range(rows):
-            for col in range(cols):
-                if board[row][col] not in root.children:
-                    continue
-                dfs(row, col, root, "")
+            board[row][col] = '#'
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            for x, y in directions:
+                new_row, new_col = row + x, col + y
+                backtrack(new_row, new_col, next_node)
+            board[row][col] = char
 
-        return list(ans)
+        for row in range(m):
+            for col in range(n):
+                backtrack(row, col, start)
+        return matched

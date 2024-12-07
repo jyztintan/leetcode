@@ -3,7 +3,6 @@ class Solution:
         nums.sort()
 
         ans = []
-
         subset = []
 
         def backtrack(idx):
