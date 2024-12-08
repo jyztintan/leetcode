@@ -1,14 +1,14 @@
 class Solution:
-    def merge(self, intervals):
-        intervals.sort(key=lambda x:x[0])
-        merged = []
-        for start, end in intervals:
-            if merged and merged[-1][1] >= start:
-                merged[-1][1] = max(merged[-1][1], end)
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        new_intervals = []
+        for idx, (start, end) in enumerate(intervals):
+            if end < newInterval[0]:
+                new_intervals.append([start, end])
+            elif newInterval[1] < start:
+                new_intervals.append(newInterval)
+                return new_intervals + intervals[idx:]
             else:
-                merged.append([start, end])
-        return merged
+                newInterval = [min(newInterval[0], start), max(newInterval[1], end)]
 
-    def insert(self, intervals, newInterval):
-        intervals.append(newInterval)
-        return self.merge(intervals)
+        new_intervals.append(newInterval)
+        return new_intervals
