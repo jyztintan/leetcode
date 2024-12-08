@@ -1,36 +1,25 @@
 class MyCalendarTwo:
 
     def __init__(self):
-        # Invariant: This should always be sorted
         self.bookings = []
-        self.double = []
+        self.double_bookings = []
 
-    def book(self, start: int, end: int) -> bool:
-
-        def is_overlapping(start1, end1, start2, end2):
-            return max(start1, start2) < min(end1, end2)
-
-        def get_overlap(start1, end1, start2, end2):
-            return [max(start1, start2), min(end1, end2)]
-
-        for overlap_s, overlap_e in self.double:
-            if is_overlapping(start, end, overlap_s, overlap_e):
+    def book(self, startTime: int, endTime: int) -> bool:
+        for start, end in self.double_bookings:
+            # Check for overlap
+            if start < endTime and startTime < end:
                 return False
 
-        # Add new booking into self.bookings
-        for s, e in self.bookings:
-            # Update double bookings if overlap exists
-            if is_overlapping(start, end, s, e):
-                self.double.append(get_overlap(start, end, s, e))
+        for start, end in self.bookings:
+            # Check for overlap
+            if start < endTime and startTime < end:
+                # Get overlap
+                overlap = [max(start, startTime), min(end, endTime)]
+                self.double_bookings.append(overlap)
 
-        self.bookings.append([start, end])
-
+        self.bookings.append([startTime, endTime])
         return True
 
-
-# Your MyCalendar object will be instantiated and called as such:
+# Your MyCalendarTwo object will be instantiated and called as such:
 # obj = MyCalendarTwo()
-# print(obj.book(10, 20))
-# print(obj.book(15, 20))
-# print(obj.book(20, 30))
-# print(obj.book(17, 30))
+# param_1 = obj.book(startTime,endTime)
