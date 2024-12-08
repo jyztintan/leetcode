@@ -1,4 +1,24 @@
 class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if len(nums) <= 3:
+            return max(nums)
+
+        robbed_first = [0] * n
+        skipped_first = [0] * n
+
+        robbed_first[0] = nums[0]
+        robbed_first[1] = nums[0]
+        for idx in range(2, n - 1):
+            robbed_first[idx] = max(robbed_first[idx - 1], robbed_first[idx - 2] + nums[idx])
+
+        skipped_first[1] = nums[1]
+        for idx in range(2, n):
+            skipped_first[idx] = max(skipped_first[idx - 1], skipped_first[idx - 2] + nums[idx])
+
+        return max(robbed_first[n - 2], skipped_first[n - 1])
+
+class Solution:
     def rob(self, nums) -> int:
 
         if len(nums) < 3:

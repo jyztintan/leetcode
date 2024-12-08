@@ -16,3 +16,16 @@ class Solution:
         return max(nums[0], nums[1])
 
 
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n <= 2:
+            return max(nums)
+
+        # We make nums keep track of the highest possible robbing value up to house i
+        nums[1] = max(nums[0], nums[1])
+        for i in range(2, n):
+            nums[i] = max(nums[i - 1], nums[i - 2] + nums[i])
+
+        return max(nums[n - 1], nums[n - 2])
+
