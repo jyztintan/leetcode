@@ -11,4 +11,3 @@ class Solution:
                 best = i + 1
 
         return best if total >= 0 else -1
-

@@ -1,22 +1,19 @@
-# Kadane's Algorithm -> O(n) time
-
 class Solution:
-    def maxProduct(self, nums) -> int:
-        if len(nums) == 1:
-            return nums[0]
+    def maxProduct(self, nums: List[int]) -> int:
 
-        highest = nums[0]
-        lowest = nums[0]
-        ans = nums[0]
+        largest_subarr = None
+        curr_neg_subarr = None
+        curr_pos_subarr = None
 
-        for num in nums[1:]:
+        for num in nums:
+            if curr_pos_subarr is None:
+                curr_pos_subarr = curr_neg_subarr = largest_subarr = num
+                continue
             if num < 0:
-                highest, lowest = lowest, highest
+                curr_neg_subarr, curr_pos_subarr = curr_pos_subarr, curr_neg_subarr
 
-            highest = max(num, num * highest)
-            lowest = min(num, num * lowest)
-            ans = max(ans, highest)
-        return ans
+            curr_pos_subarr = max(curr_pos_subarr * num, num)
+            curr_neg_subarr = min(curr_neg_subarr * num, num)
+            largest_subarr = max(largest_subarr, curr_pos_subarr)
 
-
-# print(Solution().maxProduct([2,3,-2,4]))
+        return largest_subarr

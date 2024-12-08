@@ -23,5 +23,5 @@ class Solution:
 
         return True
 
-hand = [1,2,3,6,2,3,4,7,8]
-print(Solution().isNStraightHand(hand, 3))
+# hand = [1,2,3,6,2,3,4,7,8]
+# print(Solution().isNStraightHand(hand, 3))

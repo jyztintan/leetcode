@@ -1,4 +1,5 @@
 # Solution 1: Using Greedy solution
+# Moving goal backwards
 class Solution:
 
     def canJump(self, nums) -> bool:
@@ -13,6 +14,16 @@ class Solution:
         # to be able to reach the actual end goal
         return target == 0
 
+# Moving forward
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        ptr = 0
+        furthest = nums[0]
+        while ptr < n - 1 and ptr <= furthest:
+            furthest = max(furthest, ptr + nums[ptr])
+            ptr += 1
+        return furthest >= n - 1
 
 # Using Stack and DFS Traversal
 # class Solution:
