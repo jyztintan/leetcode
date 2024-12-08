@@ -1,18 +1,32 @@
+# O(NlogN) as we employ binary search to find the best subsequence
+from bisect import bisect_left
+
+
 class Solution:
-    def lengthOfLIS(self, nums) -> int:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        longest_sub = []
+        for num in nums:
+            idx = bisect_left(longest_sub, num)
+
+            # The current number is > all numbers in the curr subsequence
+            if idx == len(longest_sub):
+                longest_sub.append(num)
+            else:
+                longest_sub[idx] = num
+
+        return len(longest_sub)
+
+
+
+# O(N^2) time complexity, where iterate through all the elements to the left, for every element
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        n = len(nums)
         # Initially, the longest subsequence is just the number itself
-        ans = [1] * len(nums)
-
-        # For each number, we check if it can be added to previous subsequences
-        for i in range(len(nums)):
-            # Each number before this has been processed, so we take the longest subsequence out of these
-            # Then we append the current number to the longest subsequence to get an even longer subsequence
-            for j in range(i):
-                # Check that the number can be added to the subsequence
-                if nums[i] > nums[j]:
-                    # Check that the new subsequence is the longest
-                    ans[i] = max(ans[i], ans[j] + 1)
-        return max(ans)
-
-# nums = [10,9,2,5,3,7,101,18]
-# print(Solution().lengthOfLIS(nums))
+        best = [1] * n
+        for right in range(n):
+            for left in range(right):
+                # Add the number to the existing subsequence
+                if nums[right] > nums[left]:
+                    best[right] = max(best[right], best[left] + 1)
+        return max(best)
