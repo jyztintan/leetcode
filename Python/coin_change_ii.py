@@ -1,38 +1,33 @@
-# Solution 1: 2D Dynamic Programming
 class Solution:
-    def change(self, amount: int, coins) -> int:
-        # We use the index number to represent number of combinations from amount 0 to target amount
+    def change(self, amount: int, coins: List[int]) -> int:
+        n = len(coins)
         dp = [0] * (amount + 1)
         dp[0] = 1
 
-        for coin in coins:
-            for sub_amt in range(coin, amount + 1):
-                dp[sub_amt] += dp[sub_amt - coin]
-        return dp[amount + 1]
-
+        for i in range(n - 1, -1, -1):
+            coin = coins[i]
+            for j in range(coin, amount + 1):
+                dp[j] += dp[j - coin]
+        return dp[amount]
 
 # Solution 2: Memoization
 class Solution:
-    def __init__(self):
-        self.coins = None
-        self.memoize = {}
+    def change(self, amount: int, coins: List[int]) -> int:
+        memo = {}
 
-    def change(self, amount: int, coins) -> int:
-        self.coins = coins
-
-        def count(amount, num_coins):
-            if not num_coins or amount < 0:
+        def make_change(num_coins, amt):
+            if amt < 0 or not num_coins:
                 return 0
-            if amount == 0:
+            if amt == 0:
                 return 1
-            if (amount, num_coins) in self.memoize:
-                return self.memoize[(amount, num_coins)]
-            x = self.memoize[(amount, num_coins - 1)] = count(amount, num_coins - 1)
-            y = self.memoize[(amount - self.coins[num_coins - 1], num_coins)] = count(
-                amount - self.coins[num_coins - 1], num_coins)
-            return x + y
+            if (num_coins, amt) in memo:
+                return memo[(num_coins, amt)]
 
-        return count(amount, len(coins))
+            coin = coins[num_coins - 1]
+            memo[(num_coins, amt)] = make_change(num_coins, amt - coin) + make_change(num_coins - 1, amt)
+            return memo[(num_coins, amt)]
+
+        return make_change(len(coins), amount)
 
 
 coins = [1, 2, 5]

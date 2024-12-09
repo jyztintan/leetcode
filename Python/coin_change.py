@@ -1,6 +1,5 @@
+# Bottom Up
 class Solution:
-    def __init__(self):
-        self.memoize = {}
     def coinChange(self, coins, amount: int) -> int:
         dp = [float('inf')] * (amount + 1)
 
@@ -16,3 +15,23 @@ class Solution:
         if dp[amount] == float('inf'):
             return -1
         return dp[amount]
+
+# Top down
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        memo = {}
+        def dfs(amt):
+            if amt < 0:
+                return -1
+            if amt == 0:
+                return 0
+            if amt in memo:
+                return memo[amt]
+            min_coins = float('inf')
+            for coin in coins:
+                subproblem = dfs(amt - coin)
+                if subproblem != -1:
+                    min_coins = min(min_coins, subproblem + 1)
+            memo[amt] = min_coins if min_coins != float('inf') else -1
+            return memo[amt]
+        return dfs(amount)

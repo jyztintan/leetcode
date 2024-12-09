@@ -12,6 +12,7 @@ class Solution:
             if idx == len(longest_sub):
                 longest_sub.append(num)
             else:
+                # Replace the current number at the i-th position with this number
                 longest_sub[idx] = num
 
         return len(longest_sub)

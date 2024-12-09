@@ -1,7 +1,11 @@
-# Solution 1: 2D-Dynamic Programming
+# Solution 1: 2D-Dynamic Programming with space optimisation
 # Sort of 2D but every time we iterate the new row we write over the previous row data
+# This makes our space O(min(M, N))
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        if len(text1) < len(text2):
+            text1, text2 = text2, text1
+
         rows, cols = len(text1), len(text2)
         dp = [0] * (cols + 1)
 
@@ -15,23 +19,43 @@ class Solution:
             dp = template_row
         return dp[cols]
 
-# Solution 2: Memoization
+# Solution 2: 2D-Dynamic Programming
+# Time and space: O(M * N)
 class Solution:
-    memoize = {"" : 0}
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
-        if not text1 or not text2:
-            return 0
-        if text1[-1] == text2[-1]:
-            if (text1[:-1], text2[:-1]) not in self.memoize:
-                self.memoize[(text1[:-1], text2[:-1])] = self.longestCommonSubsequence(text1[:-1], text2[:-1])
-            return self.memoize[(text1[:-1], text2[:-1])] + 1
-        if (text1[:-1], text2) not in self.memoize:
-            self.memoize[(text1[:-1], text2)] = self.longestCommonSubsequence(text1[:-1], text2)
-        possible = self.memoize[(text1[:-1], text2)]
-        if (text1, text2[:-1]) not in self.memoize:
-            self.memoize[(text1, text2[:-1])] = self.longestCommonSubsequence(text1, text2[:-1])
-        other_possible = self.memoize[(text1, text2[:-1])]
-        return possible if possible > other_possible else other_possible
+        rows, cols = len(text1), len(text2)
+        dp = [[0] * (cols + 1) for _ in range(rows + 1)]
 
-test = Solution()
-print(test.longestCommonSubsequence("abcde", "ace"))
+        for row in range(1, rows + 1):
+            for column in range(1, cols + 1):
+                if text1[row - 1] == text2[column - 1]:
+                    dp[row][column] = dp[row - 1][column - 1] + 1
+                else:
+                    dp[row][column] = max(dp[row][column - 1], dp[row - 1][column])
+        return dp[rows][cols]
+
+
+# Solution 3: Memoization
+# Time and space: O(M * N)
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+
+        memo = {}
+
+        def check(ptr1, ptr2):
+            if ptr1 < 0 or ptr2 < 0:
+                return 0
+
+            if (ptr1, ptr2) in memo:
+                return memo[(ptr1, ptr2)]
+
+            if text1[ptr1] == text2[ptr2]:
+                memo[(ptr1, ptr2)] = check(ptr1 - 1, ptr2 - 1) + 1
+            else:
+                memo[(ptr1, ptr2)] = max(check(ptr1 - 1, ptr2), check(ptr1, ptr2 - 1))
+            return memo[(ptr1, ptr2)]
+
+        return check(len(text1) - 1, len(text2) - 1)
+
+# test = Solution()
+# print(test.longestCommonSubsequence("abcde", "ace"))

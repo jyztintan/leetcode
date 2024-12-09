@@ -1,5 +1,20 @@
 class Solution:
     def wordBreak(self, s: str, wordDict) -> bool:
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True
+
+        for idx in range(n):
+            if not dp[idx]:
+                continue
+            for word in wordDict:
+                end = idx + len(word)
+                if end <= n and s[idx:end] == word:
+                    dp[end] = True
+        return dp[n]
+
+class Solution:
+    def wordBreak(self, s: str, wordDict) -> bool:
         dp = [False] * (len(s) + 1)
         dp[len(s)] = True
 

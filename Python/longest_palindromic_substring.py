@@ -1,24 +1,23 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        ans = ""
-        highest = 0
-
-        for i in range(len(s)):
-            left, right = i, i
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                if right - left + 1 > highest:
-                    ans = s[left:right+1]
-                    highest = right - left + 1
+        # Keep track of left, right pointer instead of doing the string slicing in the loop which
+        # may get quite expensive if there are many long palindromes
+        best = [0, 0]
+        n = len(s)
+        for i in range(n):
+            left = right = i
+            while left >= 0 and right < n and s[left] == s[right]:
+                if right - left > best[1] - best[0]:
+                    best = [left, right]
                 left -= 1
                 right += 1
 
-            left, right = i, i + 1
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                if right - left + 1 > highest:
-                    ans = s[left:right + 1]
-                    highest = right - left + 1
+            left = i - 1
+            right = i
+            while left >= 0 and right < n and s[left] == s[right]:
+                if right - left > best[1] - best[0]:
+                    best = [left, right]
                 left -= 1
                 right += 1
 
-        return ans
-
+        return s[best[0]:best[1] + 1]
