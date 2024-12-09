@@ -1,5 +1,21 @@
 class Solution:
     def maxProfit(self, prices) -> int:
+        # We create finite automata to simulate the possible plays
+        sold = 0
+        hold = -float('inf')
+        stall = 0
+
+        for price in prices:
+            pre_sold = sold
+            sold = hold + price
+            hold = max(hold, stall - price)
+            stall = max(stall, pre_sold)
+
+        return max(stall, sold)
+
+
+class Solution:
+    def maxProfit(self, prices) -> int:
         days = len(prices)
         # 0th index represents if we buy
         # 1st index if we sell

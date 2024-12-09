@@ -15,7 +15,7 @@ class Solution:
         total_days = len(prices)
         valley = peak = prices[0]
 
-        while day < total_days:
+        while day < total_days - 1:
             # While it is decreasing
             while day + 1 < total_days and prices[day] >= prices[day + 1]:
                 day += 1
