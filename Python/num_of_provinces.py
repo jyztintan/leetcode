@@ -24,9 +24,6 @@ print(Solution().findCircleNum(isConnected))
 
 
 # Solution 2: UFDS Solution
-# Thank you Prof Halim for teaching UFDS during my time in CS2040S AY23/24 Semester 1
-# Source: https://github.com/stevenhalim/cpbook-code/blob/master/ch2/ourown/unionfind_ds.py
-# Modified variable naming for code readability
 class UFDS:
     def __init__(self, n):
         self.parents = list(range(n))
