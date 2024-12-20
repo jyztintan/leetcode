@@ -1,3 +1,16 @@
+# Time: O(N), Space: O(1) amazing elegant
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        count = 0
+        max_ele = 0
+        for idx, num in enumerate(arr):
+            max_ele = max(max_ele, num)
+
+            if max_ele == idx:
+                count += 1
+        return count
+
+# Time: O(N), Space: O(N)
 class Solution:
     def maxChunksToSorted(self, arr: List[int]) -> int:
         count = 0
