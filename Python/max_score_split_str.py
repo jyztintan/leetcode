@@ -2,7 +2,23 @@
 # Spcae: O(1)
 class Solution:
     def maxScore(self, s: str) -> int:
+        n = len(s)
+        ones, zeros = 0, 0
+        most_left_zeros = - n
 
+        for idx in range(n - 1):
+            if s[idx] == '1':
+                ones += 1
+            else:
+                zeros += 1
+
+            # The number of zeroes are the processed zeroes - ones
+            most_left_zeros = max(most_left_zeros, zeros - ones)
+
+        if s[n - 1] == '1':
+            ones += 1
+
+        return most_left_zeroes + ones
 
 
 
