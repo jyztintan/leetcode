@@ -1,6 +1,6 @@
 # Leetcode
 
-<p>
+<p text-align="center">
   <img src="https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap" alt="LeetCode Stats" width="400" />
 </p>
 <p>
@@ -471,6 +471,7 @@
 | 3133 | Minimum Array End                                                           | <a href="Python/min_arr_end.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                                      |
 | 3151 | Special Array I                                                             | <a href="Python/special_arr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                                    |
 | 3153 | Sum of Digit Differences of All Pairs                                       | <a href="Python/sum_digit_diff_all_pairs.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                         |
+| 3160 | Find the Number of Distinct Colors Among the Balls                          | <a href="Python/find_num_distinct_colours_balls.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                  |
 | 3163 | String Compression III                                                      | <a href="Python/str_compression_iii.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                              |
 | 3217 | Delete Nodes From Linked List Present in Array                              | <a href="Python/delete_nodes_linked_list.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                         |
 | 3223 | Minimum Length of String After Operations                                   | <a href="Python/min_len_str_aft_ops.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                              |
