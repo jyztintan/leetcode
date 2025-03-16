@@ -55,6 +55,6 @@ class Solution:
         return ans
 
 
-nums = [2,0,2]
-queries = [[0,2,1],[0,2,1],[1,1,3]]
-print(Solution().minZeroArray(nums, queries))
+# nums = [2,0,2]
+# queries = [[0,2,1],[0,2,1],[1,1,3]]
+# print(Solution().minZeroArray(nums, queries))
