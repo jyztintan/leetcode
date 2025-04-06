@@ -80,4 +80,3 @@ class Solution:
         min_score = sum(min_checkpoints[:k - 1])
 
         return max_score - min_score
-
