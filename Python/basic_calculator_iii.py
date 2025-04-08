@@ -1,9 +1,9 @@
 class Solution:
     def calculate(self, s: str) -> int:
+        s += "+"
         st = []
         processed = prev = curr = 0
         sign = "+"
-        s += "+"
         for c in s:
             if c.isdigit():
                 curr = curr * 10 + int(c)

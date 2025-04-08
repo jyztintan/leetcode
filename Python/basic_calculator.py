@@ -1,6 +1,6 @@
 class Solution:
     def calculate(self, s: str) -> int:
-
+        s += "s"
         # Store intermediate results as we process nested brackets
         st = []
 
@@ -13,14 +13,12 @@ class Solution:
                 curr = (curr * 10) + int(c)
             elif c == "+":
                 processed += curr * sign
-
                 # Reset
                 curr = 0
                 sign = 1
 
             elif c == "-":
                 processed += curr * sign
-
                 # Reset
                 curr = 0
                 sign = -1
@@ -28,7 +26,6 @@ class Solution:
             elif c == "(":
                 st.append(processed)
                 st.append(sign)
-
                 # Reset results
                 processed = 0
                 sign = 1
@@ -43,5 +40,4 @@ class Solution:
 
                 curr = 0
 
-        processed += curr * sign
         return processed
