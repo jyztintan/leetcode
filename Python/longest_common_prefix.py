@@ -1,6 +1,22 @@
 # Time: O(S * N) where S and N are the maximum str length and N is the number of strs
 # Space: O(1)
 class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:
+            return ""
+
+        first = strs[0]
+        ptr = len(first)
+        for word in strs[1:]:
+            check = 0
+            while check < len(word) and check < ptr and word[check] == first[check]:
+                check += 1
+            ptr = check
+        return first[:ptr]
+
+# Time: O(S * N) where S and N are the maximum str length and N is the number of strs
+# Space: O(max(len(strs)))
+class Solution:
     def longestCommonPrefix(self, strs) -> str:
         if not strs:
             return ""
