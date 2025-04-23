@@ -1,3 +1,33 @@
+class Solution:
+    def minArea(self, image: List[List[str]], x: int, y: int) -> int:
+        def searchRows(l, r, top):
+            while l <= r:
+                mid = (l+r)//2
+                if ("1" in image[mid]) == top:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+
+            return l
+
+        def searchCols(l, r, left):
+            while l <= r:
+                mid = (l+r)//2
+                if any(image[x][mid] == "1" for x in range(top, bottom)) == left:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+
+            return l
+
+        m, n = len(image), len(image[0])
+
+        top = searchRows(0, x, True)
+        bottom = searchRows(x, m-1, False)
+        left = searchCols(0, y, True)
+        right = searchCols(y, n-1, False)
+
+        return (right - left) * (bottom - top)
 
 # DFS Solution
 # Time complexity: O(M * N), where V = M * N
