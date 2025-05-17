@@ -1,4 +1,21 @@
 class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        ptr = 0
+        n = len(nums)
+        for idx in range(n):
+            if nums[idx] == 0:
+                nums[ptr], nums[idx] = nums[idx], nums[ptr]
+                ptr += 1
+        for idx in range(n):
+            if nums[idx] == 1:
+                nums[ptr], nums[idx] = nums[idx], nums[ptr]
+                ptr += 1
+
+
+class Solution:
     def sortColors(self, nums) -> None:
         """
         Do not return anything, modify nums in-place instead.
