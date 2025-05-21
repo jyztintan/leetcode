@@ -1,4 +1,4 @@
-# O(N) pass
+# O(Q + N) pass
 # O(N) space
 class Solution:
     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
@@ -16,7 +16,7 @@ class Solution:
         return True
 
 
-# O(NlogN) for sorting (after creating events)
+# O(QlogQ + N) for sorting (after creating events)
 # O(N) space
 class Solution:
     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
