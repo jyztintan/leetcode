@@ -22,23 +22,33 @@ LANG_INFO = {  # canonical lang → (folder, extension, devicon_folder, icon_nam
     "sql": ("postgreSQL", ".sql", "postgresql", "postgresql-original"),
 }
 
+# support various prog lang naming
+ALIASES = {
+    "py":       "python",
+    "c++":      "cpp",
+    "cc":       "cpp",
+    "jv":       "java",
+    "ts":       "typescript",
+}
+
 
 # -------------------------------------------------------------------
 
+# sluggify file name from pset name
 def slugify(title: str) -> str:
     return re.sub(r"\s+", "_", title.strip().lower())
 
 
-def build_paths(num: int, title: str, lang_key: str):
+def build_paths(title: str, lang_key: str):
     if lang_key not in LANG_INFO:
-        sys.exit(f"❌  Unknown language '{lang_key}'. Known: {list(LANG_INFO)}")
+        sys.exit(f"❌ Unknown language '{lang_key}'. Known: {list(LANG_INFO)}")
     folder, ext, *_ = LANG_INFO[lang_key]
     slug = slugify(title)
     file_path = pathlib.Path(folder) / f"{slug}{ext}"
     return file_path
 
 
-def ensure_file(path: pathlib.Path, num: int, title: str):
+def ensure_file(path: pathlib.Path):
     if path.exists():
         return
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -46,7 +56,7 @@ def ensure_file(path: pathlib.Path, num: int, title: str):
     path.write_text(header)
 
     abs_path = path.resolve()  # now *absolute*
-    print(f"📝 Created file:")
+    print(f"📝Created file:")
     print(abs_path.as_uri())
 
 
@@ -65,35 +75,36 @@ def update_readme(row: str, num: int):
     lines = README.read_text().splitlines()
     i_start, i_end = lines.index(start), lines.index(end)
 
-    head = lines[: i_start + 1]          # up to and incl. START marker
-    tail = lines[i_end :]                # from END marker to EOF
+    head = lines[: i_start + 1]  # up to and incl. START marker
+    tail = lines[i_end:]  # from END marker to EOF
 
     import re
     is_entry = re.compile(r'^\|\s*\d+')
-    table = [l for l in lines[i_start + 1 : i_end] if is_entry.match(l)]
+    table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
 
     # replace or append current row
     table = [r for r in table if not r.lstrip("| ").startswith(str(num))]
     table.append(row)
     table.sort(key=lambda r: int(r.split("|")[1].strip()))
 
-    header    = "| # | Title | Lang |"
+    header = "| # | Title | Lang |"
     separator = "|---|-------|------|"
     README.write_text(
         "\n".join(head + [header, separator] + table + tail) + "\n"
     )
-    print("✅  README updated")
+    print("✅ README updated")
 
 
 def main():
-    if len(sys.argv) != 4:
+    if len(sys.argv) < 4:
         sys.exit("Usage: add_new_pset.py <number>. <Title> <language>")
     num = int(sys.argv[1][:-1])
-    title = sys.argv[2]
-    lang_key = sys.argv[3].lower()
+    title = " ".join(sys.argv[2:-1])
+    lang_key = sys.argv[-1].lower()
+    lang_key = ALIASES.get(lang_key, lang_key)
 
-    file_path = build_paths(num, title, lang_key)
-    ensure_file(file_path, num, title)
+    file_path = build_paths(title, lang_key)
+    ensure_file(file_path)
     row = make_row(num, title, file_path, lang_key)
     update_readme(row, num)
 
