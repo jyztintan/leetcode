@@ -24,19 +24,57 @@ LANG_INFO = {  # canonical lang → (folder, extension, devicon_folder, icon_nam
 
 # support various prog lang naming
 ALIASES = {
-    "py":       "python",
-    "c++":      "cpp",
-    "cc":       "cpp",
-    "jv":       "java",
-    "ts":       "typescript",
+    "py": "python",
+    "c++": "cpp",
+    "cc": "cpp",
+    "jv": "java",
+    "ts": "typescript",
 }
-
 
 # -------------------------------------------------------------------
 
-# sluggify file name from pset name
+STOPWORDS = {
+    "of", "the", "a", "an", "in", "on", "at", "with", "to", "and", "or", "by",
+    "for", "from", "is", "are", "be", "that", "this"
+}
+
+SUBS = {
+    # data-structure & algo nouns
+    "array": "arr",
+    "arrays": "arrs",
+    "subarray": "subarr",
+    "subarrays": "subarrs",
+    "number": "num",
+    "numbers": "nums",
+    "integer": "int",
+    "integers": "ints",
+    "string": "str",
+    "strings": "strs",
+    "substring": "substr",
+    "substrings": "substrs",
+    "character": "char",
+    "characters": "chars",
+    "list": "lst",
+    "lists": "lsts",
+    "tree": "tree",
+    "trees": "trees",
+    "without": "wo",
+    "minimum": "min",
+    "maximum": "max",
+}
+
+
 def slugify(title: str) -> str:
-    return re.sub(r"\s+", "_", title.strip().lower())
+    words = re.findall(r"[A-Za-z0-9']+", title.lower())
+
+    out = []
+    for w in words:
+        if w in STOPWORDS:
+            continue
+        w = SUBS.get(w, w)
+        out.append(w)
+
+    return "_".join(out)
 
 
 def build_paths(title: str, lang_key: str):
