@@ -88,27 +88,36 @@ def build_paths(title: str, lang_key: str):
 
 def ensure_file(path: pathlib.Path):
     if path.exists():
-        return
+        abs_path = path.resolve()
+        print(f"⚠️File already exists:")
+        print(abs_path.as_uri())
+        return False
     path.parent.mkdir(parents=True, exist_ok=True)
     header = textwrap.dedent("")
     path.write_text(header)
 
-    abs_path = path.resolve()  # now *absolute*
+    abs_path = path.resolve()
     print(f"📝Created file:")
     print(abs_path.as_uri())
+    return True
 
 
-def make_row(num: int, title: str, path: pathlib.Path, lang_key: str) -> str:
+def make_link(path: pathlib.Path, lang_key: str) -> str:
+    """Return the <a href=…><img …></a> snippet for one language/file."""
     _, _, icon_folder, icon_name = LANG_INFO[lang_key]
-    link = (
+    return (
         f'<a href="{path.as_posix()}">'
         f'<img src="https://raw.githubusercontent.com/devicons/devicon/'
         f'master/icons/{icon_folder}/{icon_name}.svg" width="40px"></a>'
     )
-    return f"| {num} | {title} | {link} |"
 
 
-def update_readme(row: str, num: int):
+def make_row(num: int, title: str, links: list[str]) -> str:
+    """Compose a full Markdown table row from number, title, and link list."""
+    return f"| {num} | {title} | {' '.join(links)} |"
+
+
+def update_readme(new_link: str, num: int, title: str):
     start, end = "<!-- LEETCODE TABLE START -->", "<!-- LEETCODE TABLE END -->"
     lines = README.read_text().splitlines()
     i_start, i_end = lines.index(start), lines.index(end)
@@ -120,9 +129,20 @@ def update_readme(row: str, num: int):
     is_entry = re.compile(r'^\|\s*\d+')
     table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
 
-    # replace or append current row
-    table = [r for r in table if not r.lstrip("| ").startswith(str(num))]
-    table.append(row)
+    found = False
+    for i, row in enumerate(table):
+        if row.lstrip("| ").startswith(str(num)):
+            found = True
+            cells = [c.strip() for c in row.strip("|").split("|", 2)]
+            links = cells[2].split() if cells[2] else []
+            if new_link not in links:
+                links.append(new_link)
+                table[i] = make_row(num, title, links)
+            break
+
+    if not found:  # brand-new problem → add at end
+        table.append(make_row(num, title, [new_link]))
+
     table.sort(key=lambda r: int(r.split("|")[1].strip()))
 
     header = "| # | Title | Lang |"
@@ -142,9 +162,11 @@ def main():
     lang_key = ALIASES.get(lang_key, lang_key)
 
     file_path = build_paths(title, lang_key)
-    ensure_file(file_path)
-    row = make_row(num, title, file_path, lang_key)
-    update_readme(row, num)
+    file_created = ensure_file(file_path)
+    if not file_created:
+        return
+    link = make_link(file_path, lang_key)
+    update_readme(link, num, title)
 
 
 if __name__ == "__main__":
