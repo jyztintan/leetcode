@@ -162,7 +162,7 @@ def check_done_before(num, lang_key):
     table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
 
     for i, row in enumerate(table):
-        if row.lstrip("| ").startswith(str(num)):
+        if row.lstrip("| ")[1].strip() == str(num):
             cells = [c.strip() for c in row.strip("|").split("|", 2)]
             links = cells[2]
             for path in re.findall(r'href="([^"]+)"', links):  # grab each <a href="…">
@@ -175,12 +175,12 @@ def check_done_before(num, lang_key):
     return False
 
 def main():
-    if len(sys.argv) < 4:
+    lang_key = sys.argv[-1].lower()
+    lang_key = ALIASES.get(lang_key, lang_key)
+    if lang_key not in LANG_INFO:
         sys.exit("Usage: add_new_pset.py <number>. <Title> <language>")
     num = int(sys.argv[1][:-1])
     title = " ".join(sys.argv[2:-1])
-    lang_key = sys.argv[-1].lower()
-    lang_key = ALIASES.get(lang_key, lang_key)
     if check_done_before(num, lang_key):
         return
     file_path = build_paths(title, lang_key)
