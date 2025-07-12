@@ -125,7 +125,6 @@ def update_readme(new_link: str, num: int, title: str):
     head = lines[: i_start + 1]  # up to and incl. START marker
     tail = lines[i_end:]  # from END marker to EOF
 
-    import re
     is_entry = re.compile(r'^\|\s*\d+')
     table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
 
@@ -140,7 +139,7 @@ def update_readme(new_link: str, num: int, title: str):
                 table[i] = make_row(num, title, links)
             break
 
-    if not found:  # brand-new problem → add at end
+    if not found:
         table.append(make_row(num, title, [new_link]))
 
     table.sort(key=lambda r: int(r.split("|")[1].strip()))
@@ -153,6 +152,28 @@ def update_readme(new_link: str, num: int, title: str):
     print("✅ README updated")
 
 
+def check_done_before(num, lang_key):
+    start, end = "<!-- LEETCODE TABLE START -->", "<!-- LEETCODE TABLE END -->"
+    lines = README.read_text().splitlines()
+    i_start, i_end = lines.index(start), lines.index(end)
+    folder, ext, *_ = LANG_INFO[lang_key]
+
+    is_entry = re.compile(r'^\|\s*\d+')
+    table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
+
+    for i, row in enumerate(table):
+        if row.lstrip("| ").startswith(str(num)):
+            cells = [c.strip() for c in row.strip("|").split("|", 2)]
+            links = cells[2]
+            for path in re.findall(r'href="([^"]+)"', links):  # grab each <a href="…">
+                if pathlib.Path(path).suffix == ext:
+                    print(f"⚠️  Already solved in {lang_key} → {path}")
+                    print(pathlib.Path(path).resolve().as_uri())  # or return it
+                    return True
+
+    print(f"✅ First time solving this problem in {lang_key}")
+    return False
+
 def main():
     if len(sys.argv) < 4:
         sys.exit("Usage: add_new_pset.py <number>. <Title> <language>")
@@ -160,7 +181,8 @@ def main():
     title = " ".join(sys.argv[2:-1])
     lang_key = sys.argv[-1].lower()
     lang_key = ALIASES.get(lang_key, lang_key)
-
+    if check_done_before(num, lang_key):
+        return
     file_path = build_paths(title, lang_key)
     file_created = ensure_file(file_path)
     if not file_created:
