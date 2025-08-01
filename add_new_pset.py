@@ -162,7 +162,9 @@ def check_done_before(num, lang_key):
     table = [l for l in lines[i_start + 1: i_end] if is_entry.match(l)]
 
     for i, row in enumerate(table):
-        if row.lstrip("| ")[1].strip() == str(num):
+        cells = [c.strip() for c in row.strip("|").split("|", 2)]
+        if cells[0] == str(num):
+            print(f"Found duplicated row: {cells}")
             cells = [c.strip() for c in row.strip("|").split("|", 2)]
             links = cells[2]
             for path in re.findall(r'href="([^"]+)"', links):  # grab each <a href="…">
