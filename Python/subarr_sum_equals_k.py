@@ -3,18 +3,16 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         # The empty subarray has sum 0 and occurs once
-        sum_frequency = {0: 1}
+        prefix_sum_count = {0: 1}
 
+        curr = 0
         count = 0
-        curr_sum = 0
-
         for num in nums:
-            curr_sum += num
-            if curr_sum - k in sum_frequency:
-                count += sum_frequency[curr_sum - k]
-            sum_frequency[curr_sum] = sum_frequency.get(curr_sum, 0) + 1
-
+            curr += num
+            count += prefix_sum_count.get(curr - k, 0)
+            prefix_sum_count[curr] = prefix_sum_count.get(curr, 0) + 1
         return count
+
 
 # O(N^2) Solution: TLE
 class Solution:
