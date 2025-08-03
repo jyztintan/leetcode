@@ -1,3 +1,40 @@
+# 2 pointer
+from typing import List
+
+class Solution:
+    def maxTotalFruits(self, fruits: List[List[int]], startPos: int, k: int) -> int:
+        pos = [p for p, _ in fruits]
+        qty = [v for _, v in fruits]
+        n = len(pos)
+
+        # prefix sums over qty
+        ps = [0]
+        for v in qty:
+            ps.append(ps[-1] + v)
+
+        def window_sum(i, j):
+            return ps[j + 1] - ps[i]
+
+        def travel_cost(L, R, S):
+            # min steps to cover [L, R] starting at S
+            if R <= S:          # all on the left
+                return S - L
+            if L >= S:          # all on the right
+                return R - S
+            # both sides
+            return (R - L) + min(S - L, R - S)
+
+        ans = 0
+        i = 0
+        for j in range(n):
+            # shrink from the left while too expensive
+            while i <= j and travel_cost(pos[i], pos[j], startPos) > k:
+                i += 1
+            ans = max(ans, window_sum(i, j))
+        return ans
+
+
+# Simulate
 class Solution:
     def maxTotalFruits(self, fruits: List[List[int]], startPos: int, k: int) -> int:
         positions = [p for p, _ in fruits]
