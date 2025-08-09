@@ -11,7 +11,7 @@ class Solution:
                 return 1.0
             if b <= 0:
                 return 0.0
-            return  0.25 * (
+            return 0.25 * (
                 serve(a - 100, b) +
                 serve(a - 75, b - 25) +
                 serve(a - 50, b - 50) +
