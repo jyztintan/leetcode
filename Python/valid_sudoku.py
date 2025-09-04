@@ -12,8 +12,6 @@ class Solution:
                     continue
                 box = (row // 3) * 3 + col // 3
                 if num in rows[row] or num in cols[col] or num in boxes[box]:
-                    print(row, col)
-                    print(rows)
                     return False
                 rows[row].add(num)
                 cols[col].add(num)
