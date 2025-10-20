@@ -176,6 +176,7 @@ def check_done_before(num, lang_key):
     print(f"✅ First time solving this problem in {lang_key}")
     return False
 
+
 def main():
     lang_key = sys.argv[-1].lower()
     lang_key = ALIASES.get(lang_key, lang_key)
