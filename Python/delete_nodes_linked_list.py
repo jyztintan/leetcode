@@ -8,6 +8,20 @@ class ListNode:
 
     def __repr__(self):
         return str(self.val)
+
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        nums = set(nums)
+        dummy = prev = ListNode(0)
+        dummy.next = curr = head
+        while curr != None:
+            if curr.val not in nums:
+                prev = prev.next
+            else:
+                prev.next = curr.next
+            curr = curr.next
+        return dummy.next
+
 class Solution:
     def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
         remove = set(nums)
