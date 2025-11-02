@@ -3,6 +3,63 @@ from typing import List
 
 class Solution:
     def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
+        grid = [[0] * n for _ in range(m)]
+
+        for r, c in walls:
+            grid[r][c] = 1
+
+        for r, c in guards:
+            grid[r][c] = 2
+
+        for r in range(m):
+            guard = False
+            for c in range(n):
+                if grid[r][c] == 1:
+                    guard = False
+                elif grid[r][c] == 2:
+                    guard = True
+                elif guard:
+                    grid[r][c] = 3
+
+        for r in range(m):
+            guard = False
+            for c in range(n - 1, -1, -1):
+                if grid[r][c] == 1:
+                    guard = False
+                elif grid[r][c] == 2:
+                    guard = True
+                elif guard:
+                    grid[r][c] = 3
+
+        for c in range(n):
+            guard = False
+            for r in range(m):
+                if grid[r][c] == 1:
+                    guard = False
+                elif grid[r][c] == 2:
+                    guard = True
+                elif guard:
+                    grid[r][c] = 3
+
+        for c in range(n):
+            guard = False
+            for r in range(m - 1, -1, -1):
+                if grid[r][c] == 1:
+                    guard = False
+                elif grid[r][c] == 2:
+                    guard = True
+                elif guard:
+                    grid[r][c] = 3
+
+        count = 0
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c] == 0:
+                    count += 1
+        return count
+
+class Solution:
+    def countUnguarded(self, m: int, n: int, guards: List[List[int]], walls: List[List[int]]) -> int:
         matrix = [[0] * n for _ in range(m)]
 
         for r, c in walls:
