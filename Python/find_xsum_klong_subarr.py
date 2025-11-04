@@ -1,5 +1,16 @@
 import heapq
-
+class Solution:
+    def findXSum(self, nums: List[int], k: int, x: int) -> List[int]:
+        n = len(nums)
+        ans = []
+        for i in range(n - k + 1):
+            window = nums[i: i + k]
+            counter = Counter(window)
+            kv = counter.items()
+            kv = sorted(list(kv), key=lambda x:(x[1], x[0]))
+            x_sum = sum(t[0] * t[1] for t in kv[-x:])
+            ans.append(x_sum)
+        return ans
 
 class Solution(object):
     def findXSum(self, nums, k, x):
