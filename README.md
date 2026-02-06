@@ -723,5 +723,6 @@ my Daily LeetCoding workflow.
 | 3541 | Find Most Frequent Vowel and Consonant | <a href="Python/find_most_frequent_vowel_consonant.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3566 | Partition Array into Two Equal Product Subsets                              | <a href="Python/partition_arr_equal_prdt_subsets.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a>                                                                                                                                                                      |
 | 3607 | Power Grid Maintenance | <a href="Python/power_grid_maintenance.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
+| 3634 | Minimum Removals to Balance Array | <a href="Python/min_removals_balance_arr.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3637 | Trionic Array I | <a href="Python/trionic_arr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 <!-- LEETCODE TABLE END -->
