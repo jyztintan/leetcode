@@ -725,4 +725,5 @@ my Daily LeetCoding workflow.
 | 3607 | Power Grid Maintenance | <a href="Python/power_grid_maintenance.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3634 | Minimum Removals to Balance Array | <a href="Python/min_removals_balance_arr.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3637 | Trionic Array I | <a href="Python/trionic_arr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
+| 3713 | Longest Balanced Substring I | <a href="Python/longest_balanced_substr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 <!-- LEETCODE TABLE END -->
