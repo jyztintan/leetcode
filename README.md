@@ -758,4 +758,6 @@ my Daily LeetCoding workflow.
 | 3643 | Flip Square Submatrix Vertically | <a href="Python/flip_square_submatrix_vertically.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3653 | XOR After Range Multiplication Queries I | <a href="Python/xor_after_range_multiplication_queries_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3713 | Longest Balanced Substring I | <a href="Python/longest_balanced_substr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
+| 3740 | Minimum Distance Between Three Equal Elements I | <a href="Python/min_distance_between_three_equal_elements_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
+| 3741 | Minimum Distance Between Three Equal Elements II | <a href="Python/min_distance_between_three_equal_elements_ii.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 <!-- LEETCODE TABLE END -->
