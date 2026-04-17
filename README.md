@@ -763,4 +763,5 @@ my Daily LeetCoding workflow.
 | 3713 | Longest Balanced Substring I | <a href="Python/longest_balanced_substr_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3740 | Minimum Distance Between Three Equal Elements I | <a href="Python/min_distance_between_three_equal_elements_i.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 | 3741 | Minimum Distance Between Three Equal Elements II | <a href="Python/min_distance_between_three_equal_elements_ii.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
+| 3761 | Minimum Absolute Distance Between Mirror Pairs | <a href="Python/min_absolute_distance_between_mirror_pairs.py"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" width="40px"></a> |
 <!-- LEETCODE TABLE END -->
