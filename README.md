@@ -2,18 +2,23 @@
 
 <p text-align="center">
   <img src="https://leetcard.jacoblin.cool/jyztintan?theme=nord&ext=heatmap" alt="LeetCode Stats" width="400" />
-  <img src="assets/365.png" alt="200 Day Challenge" width="200" height="320"/>
-  <img src="assets/500day.png" alt="200 Day Challenge" width="200" height="320"/>
+  <img src="assets/365.png" alt="365 Days of LeetCode" width="200" height="320"/>
+  <img src="assets/500day.png" alt="500 Days of LeetCode" width="200" height="320"/>
 </p>
 <p>
-  <img src="assets/50day.png" alt="50 Day Challenge" width="200" height="320"/>
-  <img src="assets/100day.png" alt="100 Day Challenge" width="200" height="320"/>
-  <img src="assets/200day.png" alt="200 Day Challenge" width="200" height="320"/>
+  <img src="assets/50day2026.png" alt="50 Day Challenge" width="200" height="320"/>
+  <img src="assets/100day2026.png" alt="100 Day Challenge" width="200" height="320"/>
 </p>
 <p>
   <img src="assets/50day2025.png" alt="50 Day Challenge" width="200" height="320"/>
   <img src="assets/100day2025.png" alt="100 Day Challenge" width="200" height="320"/>
   <img src="assets/200day2025.png" alt="200 Day Challenge" width="200" height="320"/>
+  <img src="assets/2025.png" alt="300 Day Challenge" width="200" height="320"/>
+</p>
+<p>
+  <img src="assets/50day.png" alt="50 Day Challenge" width="200" height="320"/>
+  <img src="assets/100day.png" alt="100 Day Challenge" width="200" height="320"/>
+  <img src="assets/200day.png" alt="200 Day Challenge" width="200" height="320"/>
 </p>
 
 ## Features
