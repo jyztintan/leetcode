@@ -1,5 +1,22 @@
 class Solution:
     def reverseParentheses(self, s: str) -> str:
+        outer = []
+        ans = []
+        for c in s:
+            if c == "(":
+                outer.append(ans)
+                ans = []
+            elif c == ")":
+                temp = ans
+                ans = outer.pop()
+                while temp:
+                    ans.append(temp.pop())
+            else:
+                ans.append(c)
+        return "".join(ans)
+
+class Solution:
+    def reverseParentheses(self, s: str) -> str:
         st = []
         curr = []
 
