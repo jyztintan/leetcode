@@ -130,9 +130,9 @@ def update_readme(new_link: str, num: int, title: str):
 
     found = False
     for i, row in enumerate(table):
-        if row.lstrip("| ").startswith(str(num)):
+        cells = [c.strip() for c in row.strip("|").split("|", 2)]
+        if cells[0] == str(num):
             found = True
-            cells = [c.strip() for c in row.strip("|").split("|", 2)]
             links = cells[2].split() if cells[2] else []
             if new_link not in links:
                 links.append(new_link)
